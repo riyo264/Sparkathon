@@ -1,12 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 
 const Chatbot = () => {
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       type: "bot",
-      content: "Hello! I'm your personal shopping assistant. I can help you find products, compare prices, and provide shopping recommendations. How can I assist you today?"
-    }
+      content:
+        "Hello! I'm your personal shopping assistant. I can help you find products, compare prices, and provide shopping recommendations. How can I assist you today?",
+    },
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -35,7 +38,10 @@ const Chatbot = () => {
     const lowerMsg = message.toLowerCase();
     if (lowerMsg.includes("deal") || lowerMsg.includes("deals")) {
       return "I can help you find the best deals! Currently, we have great discounts on electronics, fashion, and home goods. What category interests you?";
-    } else if (lowerMsg.includes("recommend") || lowerMsg.includes("suggestion")) {
+    } else if (
+      lowerMsg.includes("recommend") ||
+      lowerMsg.includes("suggestion")
+    ) {
       return "I'd be happy to recommend products! To provide better suggestions, could you tell me what type of items you're looking for and your preferred price range?";
     } else if (lowerMsg.includes("price") || lowerMsg.includes("compare")) {
       return "I can help you compare prices across different retailers. What product would you like to compare?";
@@ -48,18 +54,50 @@ const Chatbot = () => {
     }
   };
 
-  const sendMessage = () => {
-    if (inputValue.trim() === "") return;
-    
-    setMessages([...messages, { type: "user", content: inputValue }]);
-    setInputValue("");
-    setIsTyping(true);
-    
-    setTimeout(() => {
-      setIsTyping(false);
-      setMessages(prev => [...prev, { type: "bot", content: getBotResponse(inputValue) }]);
-    }, 1500);
-  };
+  const sendMessage = async () => {
+  if (inputValue.trim() === "") return;
+
+  const userMessage = `$You are a Walmart shopping assistant. Respond in 30 words max. If the user's question is clearly unrelated to shopping, Walmart, or products, reply: "Sorry! But this question is irrelevant to Shopping. I would happily guide you through our wide range of products if you want". Otherwise, give a concise helpful response. Question: ${inputValue}`;
+  setMessages([...messages, { type: "user", content: inputValue }]);
+  setInputValue("");
+  setIsTyping(true);
+
+  try {
+    const response = await axios({
+      url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyC5dlpsK6fqLV9ebsyuBFHkRo7ILjQmoFo",
+      method: "post",
+      data: {
+        contents: [
+          {
+            parts: [
+              {
+                text: userMessage,
+              },
+            ],
+          },
+        ],
+      },
+    });
+
+    const aiReply =
+      response.data.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Sorry, I couldn't understand that.";
+
+    setMessages((prev) => [
+      ...prev,
+      { type: "bot", content: aiReply },
+    ]);
+  } catch (error) {
+    console.error("Error fetching from Gemini:", error);
+    setMessages((prev) => [
+      ...prev,
+      { type: "bot", content: "Oops! Something went wrong. Try again." },
+    ]);
+  } finally {
+    setIsTyping(false);
+  }
+};
+
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -69,7 +107,8 @@ const Chatbot = () => {
 
   const handleVoiceCommand = () => {
     if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
-      const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+      const SpeechRecognition =
+        window.webkitSpeechRecognition || window.SpeechRecognition;
       const recognition = new SpeechRecognition();
 
       recognition.continuous = false;
@@ -144,13 +183,19 @@ const Chatbot = () => {
       >
         <div className="absolute w-full h-full rounded-full animate-pulse opacity-30 bg-cyan-400"></div>
         <i
-          className={`fas ${isOpen ? "fa-times" : "fa-shopping-cart"} text-cyan-400 text-xl group-hover:text-cyan-300`}
+          className={`fas ${
+            isOpen ? "fa-times" : "fa-shopping-cart"
+          } text-cyan-400 text-xl group-hover:text-cyan-300`}
         ></i>
       </button>
 
       {/* Chat window */}
       <div
-        className={`fixed bottom-24 right-6 w-[350px] h-[500px] bg-[#0A192F] border border-gray-800 rounded-lg shadow-2xl flex flex-col overflow-hidden z-40 transition-all duration-300 ease-in-out ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
+        className={`fixed bottom-24 right-6 w-[350px] h-[500px] bg-[#0A192F] border border-gray-800 rounded-lg shadow-2xl flex flex-col overflow-hidden z-40 transition-all duration-300 ease-in-out ${
+          isOpen
+            ? "opacity-100 scale-100"
+            : "opacity-0 scale-95 pointer-events-none"
+        }`}
         style={{
           boxShadow: isOpen ? "0 0 20px rgba(6, 182, 212, 0.2)" : "none",
         }}
@@ -190,7 +235,9 @@ const Chatbot = () => {
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`mb-4 max-w-[85%] ${message.type === "user" ? "ml-auto" : "mr-auto"}`}
+              className={`mb-4 max-w-[85%] ${
+                message.type === "user" ? "ml-auto" : "mr-auto"
+              }`}
             >
               <div
                 className={`p-3 rounded-lg ${
@@ -209,7 +256,7 @@ const Chatbot = () => {
               </div>
             </div>
           ))}
-          
+
           {isTyping && (
             <div className="mb-4 max-w-[85%] mr-auto">
               <div className="p-3 rounded-lg bg-gray-800 border border-gray-700 text-white rounded-bl-none">
@@ -257,7 +304,9 @@ const Chatbot = () => {
               }`}
             >
               <i
-                className={`fas fa-microphone ${isListening ? "text-red-400" : "text-cyan-400"}`}
+                className={`fas fa-microphone ${
+                  isListening ? "text-red-400" : "text-cyan-400"
+                }`}
               ></i>
             </button>
             {showVoiceTooltip && (
@@ -270,7 +319,7 @@ const Chatbot = () => {
             id="chat-input"
             type="text"
             value={inputValue}
-            onChange={handleInputChange}
+            onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Ask about products, deals, or shopping assistance..."
             className="flex-1 bg-gray-700 border-none text-white placeholder-gray-400 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-cyan-400 text-sm"
@@ -284,6 +333,7 @@ const Chatbot = () => {
           </button>
         </div>
       </div>
+      
     </div>
   );
 };

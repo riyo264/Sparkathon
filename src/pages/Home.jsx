@@ -11,6 +11,7 @@ import TrendingSection from '../components/TrendingSection';
 import Footer from '../components/Footer';
 import Chatbot from '../components/Chatbot';
 
+
 const Home = () => {
   return (
     <div className="min-h-screen bg-white">

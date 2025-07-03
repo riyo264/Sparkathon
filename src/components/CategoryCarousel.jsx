@@ -1,11 +1,13 @@
-import React from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const CategoryCarousel = () => {
+  const navigate = useNavigate();
   const categories = [
     { name: 'Grocery', icon: '🛒', image: 'https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=150' },
     { name: 'Home', icon: '🏠', image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=150' },
-    { name: 'Tech', icon: '💻', image: 'https://images.pexels.com/photos/374074/pexels-photo-374074.jpeg?auto=compress&cs=tinysrgb&w=150' },
+    { name: 'Tech', icon: '💻', image: 'https://images.pexels.com/photos/374074/pexels-photo-374074.jpeg?auto=compress&cs=tinysrgb&w=150', path: '/tech' },
     { name: 'Fashion', icon: '👗', image: 'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=150' },
     { name: 'Beauty', icon: '💄', image: 'https://images.pexels.com/photos/3785104/pexels-photo-3785104.jpeg?auto=compress&cs=tinysrgb&w=150' },
     { name: 'Sports', icon: '⚽', image: 'https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=150' },
@@ -13,7 +15,11 @@ const CategoryCarousel = () => {
     { name: 'Auto', icon: '🚗', image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=150' },
     { name: 'Garden', icon: '🌱', image: 'https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=150' },
     { name: 'Books', icon: '📚', image: 'https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=150' },
-  ]
+  ];
+
+  const handleCategoryClick = (path) => {
+    navigate(path);
+  };
 
   return (
     <section className="py-8 bg-white">
@@ -35,6 +41,7 @@ const CategoryCarousel = () => {
             <div 
               key={index} 
               className="flex-shrink-0 w-24 text-center cursor-pointer group"
+              onClick={() => handleCategoryClick(category.path)}
             >
               <div className="w-20 h-20 bg-walmart-gray rounded-full flex items-center justify-center mb-3 mx-auto group-hover:bg-walmart-blue transition-colors">
                 <img 
