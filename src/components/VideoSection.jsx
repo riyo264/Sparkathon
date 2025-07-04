@@ -36,36 +36,52 @@ const VideoSection = () => {
   ]
 
   return (
-    <section className="py-8 bg-white">
+    <section className="py-10 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Featured in Videos</h2>
-          <button className="text-walmart-blue hover:text-walmart-blue-dark font-medium">
+          <h2 className="text-2xl font-bold text-gray-900 relative inline-block">
+            Featured in Videos
+            <span className="absolute bottom-0 left-0 h-1 w-2/3 bg-gradient-to-r from-walmart-blue to-walmart-yellow rounded-full mt-1"></span>
+          </h2>
+          <button className="text-walmart-blue hover:underline hover:text-walmart-blue-dark font-medium transition">
             View All
           </button>
         </div>
 
-        <div className="flex space-x-4 overflow-x-auto scrollbar-hide pb-4">
+        {/* Video Cards */}
+        <div className="flex space-x-5 overflow-x-auto pb-4 scrollbar-hide">
           {videos.map((video) => (
-            <div 
-              key={video.id} 
-              className="flex-shrink-0 w-64 bg-white rounded-lg shadow-md overflow-hidden card-hover cursor-pointer"
+            <div
+              key={video.id}
+              className="flex-shrink-0 w-64 bg-white rounded-xl shadow-md hover:shadow-lg overflow-hidden transition-transform duration-300 hover:scale-[1.03] cursor-pointer"
             >
-              <div className="relative">
-                <img 
-                  src={video.thumbnail} 
+              {/* Thumbnail */}
+              <div className="relative group">
+                <img
+                  src={video.thumbnail}
                   alt={video.title}
-                  className="w-full h-36 object-cover"
+                  className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                  <Play className="w-12 h-12 text-white" />
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-80 group-hover:opacity-100 transition" />
+
+                {/* Play Icon */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Play className="w-12 h-12 text-white opacity-90 group-hover:scale-110 transition-transform" />
                 </div>
-                <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+
+                {/* Duration Tag */}
+                <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-0.5 rounded text-xs font-medium">
                   {video.duration}
                 </div>
               </div>
+
+              {/* Title */}
               <div className="p-4">
-                <h3 className="font-medium text-gray-900 line-clamp-2">
+                <h3 className="text-sm font-semibold text-gray-900 line-clamp-2">
                   {video.title}
                 </h3>
               </div>
