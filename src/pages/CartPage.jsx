@@ -1,5 +1,6 @@
 // Enhanced CartPage.jsx - More attractive bill section
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import kurti from '../assets/kurti.png';
 import tshirt from '../assets/tshirt.png';
 import shoe from '../assets/shoes.png';
@@ -19,8 +20,9 @@ const sampleCartItems = [
 ];
 
 const CartPage = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(sampleCartItems);
   const [promo, setPromo] = useState('');
+  const navigate = useNavigate();
 
   const updateQty = (id, delta) => {
     setCartItems((prev) =>
@@ -111,7 +113,10 @@ const CartPage = () => {
                 placeholder="Enter promo code"
                 className="w-full border border-blue-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
               />
-              <button className="mt-3 w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 rounded-full font-semibold hover:from-blue-600 hover:to-blue-700 shadow-md transition-all">
+              <button
+                onClick={() => navigate('/checkout')}
+                className="mt-3 w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 rounded-full font-semibold hover:from-blue-600 hover:to-blue-700 shadow-md transition-all"
+              >
                 Proceed to Checkout
               </button>
             </div>
