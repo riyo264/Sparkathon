@@ -1,11 +1,15 @@
 import React, { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const CategoryCarousel = () => {
+  const navigate = useNavigate();
+  const scrollRef = useRef(null);
+
   const categories = [
     { name: 'Grocery', icon: '🛒', image: 'https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=150' },
     { name: 'Home', icon: '🏠', image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=150' },
-    { name: 'Tech', icon: '💻', image: 'https://images.pexels.com/photos/374074/pexels-photo-374074.jpeg?auto=compress&cs=tinysrgb&w=150' },
+    { name: 'Tech', icon: '💻', image: 'https://images.pexels.com/photos/374074/pexels-photo-374074.jpeg?auto=compress&cs=tinysrgb&w=150', path: '/tech' },
     { name: 'Fashion', icon: '👗', image: 'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=150' },
     { name: 'Beauty', icon: '💄', image: 'https://images.pexels.com/photos/3785104/pexels-photo-3785104.jpeg?auto=compress&cs=tinysrgb&w=150' },
     { name: 'Sports', icon: '⚽', image: 'https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=150' },
@@ -15,7 +19,11 @@ const CategoryCarousel = () => {
     { name: 'Books', icon: '📚', image: 'https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=150' },
   ];
 
-  const scrollRef = useRef(null);
+  const handleCategoryClick = (path) => {
+    if (path) {
+      navigate(path);
+    }
+  };
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -56,6 +64,7 @@ const CategoryCarousel = () => {
             <div
               key={index}
               className="flex-shrink-0 w-24 text-center cursor-pointer group transition-transform duration-300 hover:scale-105"
+              onClick={() => handleCategoryClick(category.path)}
             >
               <div className="w-20 h-20 mx-auto mb-2 rounded-full border-4 border-gray-100 group-hover:border-walmart-blue shadow-sm transition-all duration-300">
                 <img
