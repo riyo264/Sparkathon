@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 const Chatbot = () => {
-
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -55,49 +54,46 @@ const Chatbot = () => {
   };
 
   const sendMessage = async () => {
-  if (inputValue.trim() === "") return;
+    if (inputValue.trim() === "") return;
 
-  const userMessage = `$You are a Walmart shopping assistant. Respond in 30 words max. If the user's question is clearly unrelated to shopping, Walmart, or products, reply: "Sorry! But this question is irrelevant to Shopping. I would happily guide you through our wide range of products if you want". Otherwise, give a concise helpful response. Question: ${inputValue}`;
-  setMessages([...messages, { type: "user", content: inputValue }]);
-  setInputValue("");
-  setIsTyping(true);
+    const userMessage = `$You are a Walmart shopping assistant. Respond in 60 words. Users may ask questions or write prompts (e.g., "best phones under 10000"). 
+Only if the input is clearly unrelated to shopping, Walmart, or products (like personal advice, jokes, or math problems), respond: "Sorry! But this question is irrelevant to Shopping. I would happily guide you through our wide range of products if you want." Otherwise, give a concise helpful response. Question or query: ${inputValue}`;
+    setMessages([...messages, { type: "user", content: inputValue }]);
+    setInputValue("");
+    setIsTyping(true);
 
-  try {
-    const response = await axios({
-      url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyC5dlpsK6fqLV9ebsyuBFHkRo7ILjQmoFo",
-      method: "post",
-      data: {
-        contents: [
-          {
-            parts: [
-              {
-                text: userMessage,
-              },
-            ],
-          },
-        ],
-      },
-    });
+    try {
+      const response = await axios({
+        url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyC5dlpsK6fqLV9ebsyuBFHkRo7ILjQmoFo",
+        method: "post",
+        data: {
+          contents: [
+            {
+              parts: [
+                {
+                  text: userMessage,
+                },
+              ],
+            },
+          ],
+        },
+      });
 
-    const aiReply =
-      response.data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "Sorry, I couldn't understand that.";
+      const aiReply =
+        response.data.candidates?.[0]?.content?.parts?.[0]?.text ||
+        "Sorry, I couldn't understand that.";
 
-    setMessages((prev) => [
-      ...prev,
-      { type: "bot", content: aiReply },
-    ]);
-  } catch (error) {
-    console.error("Error fetching from Gemini:", error);
-    setMessages((prev) => [
-      ...prev,
-      { type: "bot", content: "Oops! Something went wrong. Try again." },
-    ]);
-  } finally {
-    setIsTyping(false);
-  }
-};
-
+      setMessages((prev) => [...prev, { type: "bot", content: aiReply }]);
+    } catch (error) {
+      console.error("Error fetching from Gemini:", error);
+      setMessages((prev) => [
+        ...prev,
+        { type: "bot", content: "Oops! Something went wrong. Try again." },
+      ]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -333,7 +329,6 @@ const Chatbot = () => {
           </button>
         </div>
       </div>
-      
     </div>
   );
 };
