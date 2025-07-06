@@ -1,5 +1,3 @@
-
-=======
 import React from 'react';
 import DotGrid from './DotGrid';
 import ChromaGrid from './chromagrid';
@@ -14,7 +12,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 items-center">
 
           {/* BLACK FRIDAY HERO SECTION */}
-          <div className="relative lg:col-span-2 h-[966px] w-[64.66em] ml-[-7em] mt-[-2.5em] overflow-hidden">
+          <div className="relative lg:col-span-2 h-[1000px] overflow-hidden rounded-lg">
 
             {/* BACKGROUND LAYER: DotGrid */}
             <div className="absolute inset-0 z-1">
@@ -37,7 +35,7 @@ const Hero = () => {
             <img
               src={blackFridayImage}
               alt="Black Friday"
-              className="absolute inset-0 w-full h-full object-fill z-0 opacity-90"
+              className="absolute inset-0 w-full h-full object-cover z-0 opacity-90"
             />
 
             {/* DARK OVERLAY */}
@@ -45,7 +43,7 @@ const Hero = () => {
 
             {/* CONTENT LAYER */}
             <div className="relative z-20 w-full h-full flex flex-col items-center justify-center text-white text-center px-8">
-              <span className="text-sm uppercase text-white font-semibold tracking-wider mb-2">
+              <span className="text-sm uppercase text-red-400 font-semibold tracking-wider mb-2">
                 Limited Time Offer
               </span>
               <h2 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-wide">
@@ -63,15 +61,10 @@ const Hero = () => {
                 </button>
               </div>
             </div>
-
           </div>
-        </div>
-      </div>
-
-
 
           {/* RIGHT SIDE CARDS USING CHROMAGRID */}
-          <div className="w-full flex justify-center ml-[7em] mt-[-2.5em] items-start">
+          <div className="w-full flex justify-center items-start">
             <ChromaGrid
               items={[
                 {
@@ -94,7 +87,6 @@ const Hero = () => {
                 }
               ]}
             />
-
           </div>
 
         </div>
