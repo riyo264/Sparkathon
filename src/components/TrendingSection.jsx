@@ -51,47 +51,54 @@ const TrendingSection = () => {
   ]
 
   return (
-    <section className="py-8 bg-walmart-gray">
+    <section className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Trending on Social</h2>
-          <button className="text-walmart-blue hover:text-walmart-blue-dark font-medium">
+          <button className="text-blue-600 hover:text-blue-800 font-medium text-sm">
             View All
           </button>
         </div>
 
-        <div className="flex space-x-4 overflow-x-auto scrollbar-hide pb-4">
+        {/* Scrollable Cards */}
+        <div className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4">
           {trendingPosts.map((post) => (
-            <div 
-              key={post.id} 
-              className="flex-shrink-0 w-64 bg-white rounded-lg shadow-md overflow-hidden card-hover"
+            <div
+              key={post.id}
+              className="flex-shrink-0 w-64 bg-white rounded-xl shadow-md transition hover:shadow-lg duration-300 overflow-hidden"
             >
-              <img 
-                src={post.image} 
+              <img
+                src={post.image}
                 alt={post.caption}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-walmart-blue">{post.username}</span>
-                  <span className="text-lg font-bold text-walmart-blue">{post.price}</span>
-                </div>
-                <p className="text-sm text-gray-700 mb-3 line-clamp-2">
-                  {post.caption}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-1">
-                      <Heart className="w-4 h-4 text-gray-500" />
-                      <span className="text-xs text-gray-500">{post.likes}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <MessageCircle className="w-4 h-4 text-gray-500" />
-                      <span className="text-xs text-gray-500">{post.comments}</span>
-                    </div>
-                    <Share2 className="w-4 h-4 text-gray-500" />
+              <div className="p-4 flex flex-col justify-between h-[160px]">
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-semibold text-blue-600">
+                      {post.username}
+                    </span>
+                    <span className="text-md font-bold text-blue-700">
+                      {post.price}
+                    </span>
                   </div>
-                  <button className="btn-primary text-xs px-3 py-1">
+                  <p className="text-sm text-gray-700 line-clamp-2">{post.caption}</p>
+                </div>
+
+                <div className="flex items-center justify-between mt-4">
+                  <div className="flex items-center space-x-3 text-gray-500 text-xs">
+                    <span className="flex items-center space-x-1">
+                      <Heart className="w-4 h-4" />
+                      <span>{post.likes}</span>
+                    </span>
+                    <span className="flex items-center space-x-1">
+                      <MessageCircle className="w-4 h-4" />
+                      <span>{post.comments}</span>
+                    </span>
+                    <Share2 className="w-4 h-4 cursor-pointer" />
+                  </div>
+                  <button className="bg-blue-600 text-white text-xs px-4 py-1 rounded-full hover:bg-blue-700 transition">
                     Shop
                   </button>
                 </div>

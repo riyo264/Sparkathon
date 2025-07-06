@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const CategoryCarousel = () => {
   const navigate = useNavigate();
+  const scrollRef = useRef(null);
+
   const categories = [
     { name: 'Grocery', icon: '🛒', image: 'https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=150' },
     { name: 'Home', icon: '🏠', image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=150' },
@@ -18,7 +20,19 @@ const CategoryCarousel = () => {
   ];
 
   const handleCategoryClick = (path) => {
-    navigate(path);
+    if (path) {
+      navigate(path);
+    }
+  };
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = 200;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
@@ -27,27 +41,36 @@ const CategoryCarousel = () => {
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Shop by Category</h2>
           <div className="flex space-x-2">
-            <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+            <button
+              className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => scroll('left')}
+            >
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
-            <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+            <button
+              className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => scroll('right')}
+            >
               <ChevronRight className="w-5 h-5 text-gray-600" />
             </button>
           </div>
         </div>
-        
-        <div className="flex space-x-4 overflow-x-auto scrollbar-hide pb-4">
+
+        <div
+          ref={scrollRef}
+          className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth"
+        >
           {categories.map((category, index) => (
-            <div 
-              key={index} 
-              className="flex-shrink-0 w-24 text-center cursor-pointer group"
+            <div
+              key={index}
+              className="flex-shrink-0 w-24 text-center cursor-pointer group transition-transform duration-300 hover:scale-105"
               onClick={() => handleCategoryClick(category.path)}
             >
-              <div className="w-20 h-20 bg-walmart-gray rounded-full flex items-center justify-center mb-3 mx-auto group-hover:bg-walmart-blue transition-colors">
-                <img 
-                  src={category.image} 
+              <div className="w-20 h-20 mx-auto mb-2 rounded-full border-4 border-gray-100 group-hover:border-walmart-blue shadow-sm transition-all duration-300">
+                <img
+                  src={category.image}
                   alt={category.name}
-                  className="w-12 h-12 object-cover rounded-full"
+                  className="w-full h-full rounded-full object-cover"
                 />
               </div>
               <p className="text-sm font-medium text-gray-700 group-hover:text-walmart-blue">
@@ -58,7 +81,7 @@ const CategoryCarousel = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default CategoryCarousel
+export default CategoryCarousel;
