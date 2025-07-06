@@ -1,30 +1,65 @@
-import React, { useState } from 'react'
-import { Search, MapPin, User, ShoppingCart, Menu, ChevronDown } from 'lucide-react'
+import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  Search,
+  MapPin,
+  User,
+  ShoppingCart,
+  Menu,
+  ChevronDown,
+} from 'lucide-react';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const dropdownRef = useRef(null);
+
+  const departments = [
+    'Electronics & Media',
+    'Home, Furniture & Appliances',
+    'Clothing, Shoes & Accessories',
+    'Grocery & Essentials',
+    'Health & Beauty',
+    'Baby, Kids & Toys',
+  ];
+
+  const services = [
+    'Customer Support',
+    'Financial Services',
+    'Health & Wellness',
+    'Tech & Installation',
+    'Pickup & Delivery',
+  ];
+
+  const toggleDropdown = (menu) => {
+    setOpenDropdown(openDropdown === menu ? null : menu);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="bg-walmart-blue text-white sticky top-0 z-50 shadow-lg">
-      {/* Main Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-walmart-yellow">Walmart</h1>
-            </div>
-          </div>
+          <Link to="/" className="text-2xl font-bold text-walmart-yellow">Walmart</Link>
 
-          {/* Desktop Navigation */}
+          {/* Search & Location */}
           <div className="hidden md:flex items-center space-x-8 flex-1 max-w-3xl mx-8">
-            {/* Location */}
             <div className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow">
               <MapPin className="w-4 h-4" />
               <span className="text-sm">Location</span>
             </div>
-
-            {/* Search Bar */}
             <div className="flex-1 relative">
               <input
                 type="text"
@@ -38,9 +73,7 @@ const Header = () => {
           {/* Right Actions */}
           <div className="flex items-center space-x-6">
             <div className="hidden md:flex items-center space-x-6">
-              <div className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow">
-                <span className="text-sm">Reorder</span>
-              </div>
+              <span className="text-sm cursor-pointer hover:text-walmart-yellow">Reorder</span>
               <div className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow">
                 <User className="w-4 h-4" />
                 <span className="text-sm">Sign In</span>
@@ -51,7 +84,6 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -64,58 +96,72 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Sub Navigation */}
-      <div className="bg-walmart-blue-dark">
+      {/* Sub Navigation with Dropdowns */}
+      <div className="bg-walmart-blue-dark" ref={dropdownRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center space-x-8 h-12 overflow-x-auto scrollbar-hide">
-            <div className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow whitespace-nowrap">
-              <span className="text-sm font-medium">Departments</span>
-              <ChevronDown className="w-4 h-4" />
+          <div className="flex items-center space-x-8 h-12 overflow-visible relative">
+            {/* Dropdown - Departments */}
+            <div className="relative">
+              <div
+                onClick={() => toggleDropdown('departments')}
+                className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow whitespace-nowrap"
+              >
+                <span className="text-sm font-medium">Departments</span>
+                <ChevronDown className="w-4 h-4" />
+              </div>
+              {openDropdown === 'departments' && (
+                <div className="absolute top-10 left-0 w-64 bg-white text-black shadow-md rounded-md py-2 z-50">
+                  {departments.map((item, index) => (
+                    <Link
+                      key={index}
+                      to={`/departments/${encodeURIComponent(item.toLowerCase().replace(/\s+/g, '-'))}`}
+                      className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                    >
+                      {item}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow whitespace-nowrap">
-              <span className="text-sm font-medium">Services</span>
-              <ChevronDown className="w-4 h-4" />
+
+            {/* Dropdown - Services */}
+            <div className="relative">
+              <div
+                onClick={() => toggleDropdown('services')}
+                className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow whitespace-nowrap"
+              >
+                <span className="text-sm font-medium">Services</span>
+                <ChevronDown className="w-4 h-4" />
+              </div>
+              {openDropdown === 'services' && (
+                <div className="absolute top-10 left-0 w-64 bg-white text-black shadow-md rounded-md py-2 z-50">
+                  {services.map((item, index) => (
+                    <Link
+                      key={index}
+                      to={`/services/${encodeURIComponent(item.toLowerCase().replace(/\s+/g, '-'))}`}
+                      className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                    >
+                      {item}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
-            <span className="text-sm cursor-pointer hover:text-walmart-yellow whitespace-nowrap">Get it Fast</span>
-            <span className="text-sm cursor-pointer hover:text-walmart-yellow whitespace-nowrap">New Arrivals</span>
-            <span className="text-sm cursor-pointer hover:text-walmart-yellow whitespace-nowrap">Trending</span>
-            <span className="text-sm cursor-pointer hover:text-walmart-yellow whitespace-nowrap">Black Friday</span>
-            <span className="text-sm cursor-pointer hover:text-walmart-yellow whitespace-nowrap">Cyber Monday</span>
+
+            {/* Other Links */}
+            {['Get it Fast', 'New Arrivals', 'Trending', 'Black Friday', 'Cyber Monday'].map((label, i) => (
+              <span
+                key={i}
+                className="text-sm cursor-pointer hover:text-walmart-yellow whitespace-nowrap"
+              >
+                {label}
+              </span>
+            ))}
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-walmart-blue-dark">
-          <div className="px-4 pt-2 pb-3 space-y-1">
-            <div className="flex items-center space-x-2 mb-4">
-              <input
-                type="text"
-                placeholder="Search everything"
-                className="flex-1 px-3 py-2 rounded text-gray-900 placeholder-gray-500"
-              />
-              <Search className="w-5 h-5" />
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2 py-2">
-                <MapPin className="w-4 h-4" />
-                <span className="text-sm">Location</span>
-              </div>
-              <div className="flex items-center space-x-2 py-2">
-                <User className="w-4 h-4" />
-                <span className="text-sm">Sign In</span>
-              </div>
-              <div className="flex items-center space-x-2 py-2">
-                <ShoppingCart className="w-4 h-4" />
-                <span className="text-sm">Cart</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
