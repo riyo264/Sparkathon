@@ -1,5 +1,3 @@
-
-=======
 import React from 'react';
 import DotGrid from './DotGrid';
 import ChromaGrid from './chromagrid';
@@ -65,10 +63,6 @@ const Hero = () => {
             </div>
 
           </div>
-        </div>
-      </div>
-
-
 
           {/* RIGHT SIDE CARDS USING CHROMAGRID */}
           <div className="w-full flex justify-center ml-[7em] mt-[-2.5em] items-start">
@@ -94,7 +88,6 @@ const Hero = () => {
                 }
               ]}
             />
-
           </div>
 
         </div>
