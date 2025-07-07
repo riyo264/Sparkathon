@@ -8,6 +8,8 @@ import CartPage from './pages/CartPage';
 import Header from './components/Header';
 import CheckoutPage from './pages/CheckoutPage';      // NEW
 import OrderSuccessPage from './pages/OrderSuccessPage';  // NEW
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const App = () => {
   return (
