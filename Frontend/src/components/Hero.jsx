@@ -61,7 +61,6 @@ const Hero = () => {
                 </button>
               </div>
             </div>
-
           </div>
 
           {/* RIGHT SIDE CARDS USING CHROMAGRID */}

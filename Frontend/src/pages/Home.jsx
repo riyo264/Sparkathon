@@ -9,8 +9,6 @@ import HomeDecorSection from '../components/HomeDecorSection';
 import VideoSection from '../components/VideoSection';
 import TrendingSection from '../components/TrendingSection';
 import Footer from '../components/Footer';
-import Chatbot from '../components/Chatbot';
-
 
 const Home = () => {
   return (
@@ -24,7 +22,6 @@ const Home = () => {
         <HomeDecorSection />
         <VideoSection />
         <TrendingSection />
-        <Chatbot />
       </main>
       <Footer />
     </div>
