@@ -1,3 +1,4 @@
+// src/components/Header.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -51,15 +52,15 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-walmart-blue text-white sticky top-0 z-50 shadow-lg">
+    <header className="bg-blue-800 text-white sticky top-0 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="text-2xl font-bold text-walmart-yellow">Walmart</Link>
+          <Link to="/" className="text-2xl font-bold text-yellow-400">
+            Walmart
+          </Link>
 
-          {/* Search & Location */}
           <div className="hidden md:flex items-center space-x-8 flex-1 max-w-3xl mx-8">
-            <div className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow">
+            <div className="flex items-center space-x-1 cursor-pointer hover:text-yellow-400">
               <MapPin className="w-4 h-4" />
               <span className="text-sm">Location</span>
             </div>
@@ -67,30 +68,32 @@ const Header = () => {
               <input
                 type="text"
                 placeholder="Search everything at Walmart online and in store"
-                className="w-full px-4 py-2 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-walmart-yellow"
+                className="w-full px-4 py-2 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
               />
               <Search className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
             </div>
           </div>
 
-          {/* Right Actions */}
           <div className="flex items-center space-x-6">
             <div className="hidden md:flex items-center space-x-6">
-              <span className="text-sm cursor-pointer hover:text-walmart-yellow">Reorder</span>
-              <div className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow">
+              <span className="text-sm cursor-pointer hover:text-yellow-400">Reorder</span>
+              <div className="flex items-center space-x-1 cursor-pointer hover:text-yellow-400">
                 <User className="w-4 h-4" />
                 <span className="text-sm">Sign In</span>
               </div>
-              <div className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow">
+              <Link
+                to="/cart"
+                className="flex items-center space-x-1 cursor-pointer hover:text-yellow-400"
+              >
                 <ShoppingCart className="w-5 h-5" />
                 <span className="text-sm">Cart</span>
-              </div>
+              </Link>
             </div>
 
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 rounded-md hover:bg-walmart-blue-dark"
+                className="p-2 rounded-md hover:bg-blue-900"
               >
                 <Menu className="w-6 h-6" />
               </button>
@@ -99,15 +102,13 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Sub Navigation with Dropdowns */}
-      <div className="bg-walmart-blue-dark" ref={dropdownRef}>
+      <div className="bg-blue-900" ref={dropdownRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-8 h-12 overflow-visible relative">
-            {/* Dropdown - Departments */}
             <div className="relative">
               <div
                 onClick={() => toggleDropdown('departments')}
-                className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow whitespace-nowrap"
+                className="flex items-center space-x-1 cursor-pointer hover:text-yellow-400 whitespace-nowrap"
               >
                 <span className="text-sm font-medium">Departments</span>
                 <ChevronDown className="w-4 h-4" />
@@ -127,11 +128,10 @@ const Header = () => {
               )}
             </div>
 
-            {/* Dropdown - Services */}
             <div className="relative">
               <div
                 onClick={() => toggleDropdown('services')}
-                className="flex items-center space-x-1 cursor-pointer hover:text-walmart-yellow whitespace-nowrap"
+                className="flex items-center space-x-1 cursor-pointer hover:text-yellow-400 whitespace-nowrap"
               >
                 <span className="text-sm font-medium">Services</span>
                 <ChevronDown className="w-4 h-4" />
@@ -151,12 +151,14 @@ const Header = () => {
               )}
             </div>
 
+
             {/* Other Links */}
             {['Get it Fast', 'New Arrivals', 'Trending', 'Black Friday', 'Cyber Monday','Shop with AI'].map((label, i) => (
               <Link
                 key={i}
                 to={`/${label.toLowerCase().replace(/\s+/g, '-')}`}
                 className="text-sm cursor-pointer hover:text-walmart-yellow whitespace-nowrap"
+
               >
                 {label}
               </Link>

@@ -270,6 +270,7 @@ const Departments = () => {
           </Link>
         ))}
       </ul>
+      <h1 className="text-2xl font-bold">Department: {decodeURIComponent(category)}</h1>
       {/* You can fetch department-specific products here */}
     </div>
   );
