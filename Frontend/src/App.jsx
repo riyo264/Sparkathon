@@ -1,5 +1,5 @@
 // App.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Departments from './pages/Departments';
@@ -10,8 +10,8 @@ import CheckoutPage from './pages/CheckoutPage';      // NEW
 import OrderSuccessPage from './pages/OrderSuccessPage';  // NEW
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-
 const App = () => {
+
   return (
     <Router>
       <Header />

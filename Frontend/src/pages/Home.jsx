@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import CategoryCarousel from '../components/CategoryCarousel';
@@ -10,8 +10,16 @@ import VideoSection from '../components/VideoSection';
 import TrendingSection from '../components/TrendingSection';
 import Footer from '../components/Footer';
 import Chatbot from '../components/Chatbot';
+import LiveKitModal from '../components/LivekitModal';
 
 const Home = () => {
+
+  const [showVA, setshowVA] = useState(false);
+
+  const handleAgentClick = () => {
+    setshowVA(true)
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* <Header /> */}
@@ -24,7 +32,11 @@ const Home = () => {
         <VideoSection />
         <TrendingSection />
         <Chatbot />
+        <button className="voice-agent" onClick={handleAgentClick}>
+          <i class="fa-solid fa-microphone"></i>
+        </button>
       </main>
+      {showVA && <LiveKitModal setshowVA={setshowVA}/>}
       <Footer />
     </div>
   );
