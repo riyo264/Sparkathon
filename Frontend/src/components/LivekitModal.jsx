@@ -1,26 +1,58 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { LiveKitRoom, RoomAudioRenderer } from "@livekit/components-react";
 import "@livekit/components-styles";
 import SimpleVoiceAssistant from "./SimpleVoiceAssistant";
 
 const LiveKitModal = ({ setshowVA }) => {
+  const [name, setName] = useState("");
+  const [token, setToken] = useState(null);
+
+  const getToken = useCallback(async (userName) => {
+    try {
+      console.log("run");
+      const response = await fetch(
+        `/api/getToken?name=${encodeURIComponent(userName)}`
+      );
+      const token = await response.text();
+      setToken(token);
+      setIsSubmittingName(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    const defaultName = "user-" + Math.random().toString(36).substring(2, 10);
+    setName(defaultName);
+  }, []);
+
+  useEffect(() => {
+    if (name && !token) {
+      getToken(name);
+    }
+  }, [name, token, getToken]);
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="agent-room">
-          <LiveKitRoom
-            serverUrl={import.meta.env.VITE_LIVEKIT_URL}
-            token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTIwNjE5MzgsImlzcyI6IkFQSTZMdmpjWWdheHNyRyIsIm5iZiI6MTc1MjA2MTAzOCwic3ViIjoid2YiLCJ2aWRlbyI6eyJjYW5QdWJsaXNoIjp0cnVlLCJjYW5QdWJsaXNoRGF0YSI6dHJ1ZSwiY2FuU3Vic2NyaWJlIjp0cnVlLCJyb29tIjoiZHdmIiwicm9vbUpvaW4iOnRydWV9fQ.OvuO1qpplIztnXO3df6kA8qqc-j6YVW2dGUcffHQxA8"
-            connect={true}
-            video={false}
-            audio={true}
-            onDisconnected={() => {
-              setshowVA(false);
-            }}
-          >
-            <RoomAudioRenderer />
-            <SimpleVoiceAssistant />
-          </LiveKitRoom>
+          {token ? (
+            <LiveKitRoom
+              serverUrl={import.meta.env.VITE_LIVEKIT_URL}
+              token={token}
+              connect={true}
+              video={false}
+              audio={true}
+              onDisconnected={() => {
+                setshowVA(false);
+              }}
+            >
+              <RoomAudioRenderer />
+              <SimpleVoiceAssistant />
+            </LiveKitRoom>
+          ) : (
+            <p>Connecting to assistant...</p>
+          )}
         </div>
       </div>
     </div>
