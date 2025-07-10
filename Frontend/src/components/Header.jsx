@@ -1,6 +1,8 @@
 // src/components/Header.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 import {
   Search,
   MapPin,
@@ -22,6 +24,7 @@ const Header = () => {
     'Grocery & Essentials',
     'Health & Beauty',
     'Baby, Kids & Toys',
+    'Show all Departments',
   ];
 
   const services = [
@@ -148,13 +151,17 @@ const Header = () => {
               )}
             </div>
 
-            {['Get it Fast', 'New Arrivals', 'Trending', 'Black Friday', 'Cyber Monday'].map((label, i) => (
-              <span
+
+            {/* Other Links */}
+            {['Get it Fast', 'New Arrivals', 'Trending', 'Black Friday', 'Cyber Monday','Shop with AI'].map((label, i) => (
+              <Link
                 key={i}
-                className="text-sm cursor-pointer hover:text-yellow-400 whitespace-nowrap"
+                to={`/${label.toLowerCase().replace(/\s+/g, '-')}`}
+                className="text-sm cursor-pointer hover:text-walmart-yellow whitespace-nowrap"
+
               >
                 {label}
-              </span>
+              </Link>
             ))}
           </div>
         </div>
