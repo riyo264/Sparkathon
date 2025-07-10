@@ -32,11 +32,11 @@ const Home = () => {
         <VideoSection />
         <TrendingSection />
         <Chatbot />
-        <button className="voice-agent" onClick={handleAgentClick}>
+        {/* <button className="voice-agent" onClick={handleAgentClick}>
           <i class="fa-solid fa-microphone"></i>
-        </button>
+        </button> */}
       </main>
-      {showVA && <LiveKitModal setshowVA={setshowVA}/>}
+      {/* {showVA && <LiveKitModal setshowVA={setshowVA}/>} */}
       <Footer />
     </div>
   );

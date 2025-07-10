@@ -7,6 +7,7 @@
     margin: 0 auto;
     padding: 20px;
     height: 100%;
+    color: white;
   }
   
   .visualizer-container {
@@ -14,10 +15,12 @@
     max-width: 800px;
     height: 300px;
     margin: 0 auto;
+    color: white;
   }
   
   .control-section {
     width: 100%;
     max-width: 800px;
     margin-top: 20px;
+    color: white;
   }
