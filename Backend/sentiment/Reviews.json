@@ -1,0 +1,32 @@
+[
+  {
+    "username": "noodleFan23",
+    "rating": 5,
+    "comment": "Absolutely love these spicy noodles! The flavor is rich and the spice is just right. Will order again."
+  },
+  {
+    "username": "mildEater",
+    "rating": 3,
+    "comment": "Too spicy for me, but I can see how others might like it. Needed to add milk to calm it down."
+  },
+  {
+    "username": "studentLife",
+    "rating": 4,
+    "comment": "Cheap, quick, and tasty. Perfect for a late-night study snack. Wish it had a bit more vegetables."
+  },
+  {
+    "username": "foodieQueen",
+    "rating": 2,
+    "comment": "The texture of the noodles was too soft for my liking. Spice was okay but not impressed overall."
+  },
+  {
+    "username": "snackAttack",
+    "rating": 5,
+    "comment": "These are my go-to comfort noodles. I add a boiled egg and it tastes gourmet!"
+  },
+  {
+    "username": "justCurious",
+    "rating": 4,
+    "comment": "Pretty good! Packaging is nice and it cooks fast. Slightly too salty but manageable."
+  }
+]

@@ -1,6 +1,6 @@
 // src/pages/ProductDetails.jsx
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import product1 from '../data/Product1.json';
 import product2 from '../data/Product2.json';
@@ -30,6 +30,31 @@ const ProductDetails = () => {
   const product = allProducts[parseInt(id)];
 
   if (!product) return <div className="p-6 text-red-500">Product not found</div>;
+
+useEffect(() => {
+  fetch("http://localhost:5000/api/sentiment", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      reviews: product.reviews // the current product1 and product2 json do not have a proper reviews section  
+      // IF THE JSON HAVE A BELOW FORMAT
+      // Use "reviews: product.reviews.map((r) => r.comment)" instead of "reviews: product.reviews"
+      //            {
+        //           "title": "Travel Bag",
+        //           "price": 999,
+        //           "reviews": [
+          //             { "user": "Amit", "comment": "Great quality and value for money!" },
+          //             { "user": "Sneha", "comment": "Looks great, but zip broke quickly." }
+          //           ]
+      //            }
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      setSentiment(data.sentiment); // show result in UI
+    });
+}, [product]); //re-run when product changes  
+
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -117,6 +142,11 @@ const ProductDetails = () => {
           small spaces with ease. Made from durable, scuff-resistant polyester fabric.
         </p>
       </motion.div>
+
+    <div>
+      <h1>{product.name}</h1>
+      <p>Sentiment: {sentiment || "Analyzing..."}</p>
+    </div>
 
       {/* Reviews */}
       <motion.div

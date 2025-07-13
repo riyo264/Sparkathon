@@ -74,10 +74,9 @@
   padding: 2rem;
   border-radius: 50%;
   position: relative;
-  width: 70vh;
-  max-width: 800px;
-  height: 70vh;
-  margin-top: -50%;
+  width: 50vh;
+  height: 50vh;
+  margin-top: -48%;
 }
 
 .agent-room {
