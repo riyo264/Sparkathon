@@ -20,7 +20,7 @@ import "./SimpleVoiceAssistant.css";
 //   );
 // };
 
-const SimpleVoiceAssistant = () => {
+const SimpleVoiceAssistant = ({onAssistantResponse}) => {
   const { state, audioTrack, agentTranscriptions } = useVoiceAssistant();
   const localParticipant = useLocalParticipant();
   const { segments: userTranscriptions } = useTrackTranscription({
@@ -28,6 +28,16 @@ const SimpleVoiceAssistant = () => {
     source: Track.Source.Microphone,
     participant: localParticipant.localParticipant,
   });
+
+
+  //since it kep ton repeating everytime the agent transcriptions change, we can use a useEffect to call the onAssistantResponse callback
+//   useEffect(() => {
+//   const lastAgentMessage = agentTranscriptions?.[agentTranscriptions.length - 1];
+//   if (lastAgentMessage && onAssistantResponse) {
+//     onAssistantResponse(lastAgentMessage.text);
+//   }
+// }, [agentTranscriptions, onAssistantResponse]);
+
 
   // const [messages, setMessages] = useState([]);
 
@@ -39,6 +49,46 @@ const SimpleVoiceAssistant = () => {
 
   //   setMessages(allMessages);
   // }, [agentTranscriptions, userTranscriptions]);
+
+
+
+  //it was repeatedly printing all the changing messages
+//   const [lastSpokenText, setLastSpokenText] = useState("");
+
+// useEffect(() => {
+//   const lastAgentMessage = agentTranscriptions?.[agentTranscriptions.length - 1];
+
+//   console.log("Agent transcription segment:", lastAgentMessage);
+
+//   if (
+//     lastAgentMessage &&
+//     lastAgentMessage.text !== lastSpokenText &&
+//     onAssistantResponse
+//   ) {
+//     setLastSpokenText(lastAgentMessage.text);
+//     onAssistantResponse(lastAgentMessage.text);
+//   }
+// }, [agentTranscriptions, lastSpokenText, onAssistantResponse]);
+
+
+//to onloy print when final:true
+const [lastSpokenText, setLastSpokenText] = useState("");
+
+useEffect(() => {
+  const lastAgentMessage = agentTranscriptions?.[agentTranscriptions.length - 1];
+
+  if (
+    lastAgentMessage &&
+    lastAgentMessage.text !== lastSpokenText &&
+    lastAgentMessage.final && // ✅ only process final messages
+    onAssistantResponse
+  ) {
+    setLastSpokenText(lastAgentMessage.text);
+    onAssistantResponse(lastAgentMessage.text);
+  }
+}, [agentTranscriptions, lastSpokenText, onAssistantResponse]);
+
+
 
   return (
     <div className="voice-assistant-container">
