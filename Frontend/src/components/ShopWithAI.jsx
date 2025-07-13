@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import LiveKitModal from "../components/LivekitModal";
+import { FULL_PRODUCTS } from "../data/productsForAI"; // Adjust path
+
 
 const ShopWithAI = () => {
   const [messages, setMessages] = useState([
@@ -122,6 +124,93 @@ const ShopWithAI = () => {
     }, 1000);
   };
 
+  // const handleAssistantMessage= (text) =>{
+  //   const botMessage = {
+  //     id: Date.now().toString(),
+  //     text,
+  //     sender: "bot",
+  //     timestamp: new Date(),
+  //   };
+  //   setMessages((prev) => [...prev, botMessage]);
+  // }
+
+  const handleAssistantMessage = (text) => {
+    // Try to extract JSON tool_outputs from the assistant response
+    const toolOutputs = [
+      ...text.matchAll(/```tool_outputs\n([\s\S]*?)```/g),
+    ].map((match) => match[1]);
+
+    let products = [];
+    let productDetails = {};
+
+    if (toolOutputs.length >= 1) {
+      try {
+        const productList = JSON.parse(toolOutputs[0].replace(/'/g, '"'));
+        products = productList.products || [];
+      } catch (e) {
+        console.error("Failed to parse product list:", e);
+      }
+    }
+
+    if (toolOutputs.length >= 2) {
+      try {
+        productDetails = JSON.parse(toolOutputs[1].replace(/'/g, '"'));
+      } catch (e) {
+        console.error("Failed to parse product details:", e);
+      }
+    }
+
+    const messageText = text.split("```")[0].trim(); // remove tool_output parts
+
+
+
+    //fixing the code from giving blank screen when products properties doesnt match
+    // const finalProducts = products.map((name, index) => ({
+    //   id: index.toString(),
+    //   name,
+    //   price: 19.99, // You can dynamically add pricing later if needed
+    //   rating: 4.3, // Temporary placeholder
+    //   image: `https://readdy.ai/api/search-image?query=${encodeURIComponent(
+    //     name + " product photo"
+    //   )}&width=300&height=300`,
+    //   description:
+    //     productDetails[name]?.description || "No description provided",
+    //   quantity: productDetails[name]?.quantity || 1,
+    // }));
+
+
+    const finalProducts = products
+  .map((p) => {
+    const name = p.name || p; // support both [{name: "..."}] and ["..."]
+    const matched = FULL_PRODUCTS.find((fp) =>
+      fp.name.toLowerCase().includes(name.toLowerCase())
+    );
+    if (matched) {
+      return {
+        ...matched,
+        quantity: productDetails[name]?.quantity || 1,
+        description:
+          productDetails[name]?.description || matched.description || "No description",
+      };
+    }
+    return null;
+  })
+  .filter(Boolean); // remove nulls
+
+
+
+
+    const botMessage = {
+      id: Date.now().toString(),
+      text: messageText,
+      sender: "bot",
+      timestamp: new Date(),
+      products: finalProducts.length > 0 ? finalProducts : undefined,
+    };
+
+    setMessages((prev) => [...prev, botMessage]);
+  };
+
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSendMessage();
@@ -196,6 +285,9 @@ const ShopWithAI = () => {
                           <h3 className="font-medium text-gray-800 mb-1 truncate">
                             {product.name}
                           </h3>
+                          <p className="text-sm text-gray-600 mb-1 truncate">
+                            {product.description}
+                          </p>
                           <div className="flex items-center mb-1">
                             <span className="text-lg font-bold text-[#0071DC]">
                               ${product.price.toFixed(2)}
@@ -273,7 +365,12 @@ const ShopWithAI = () => {
           >
             <i className="fas fa-microphone"></i>
           </button>
-          {showVA && <LiveKitModal setshowVA={setshowVA} />}
+          {showVA && (
+            <LiveKitModal
+              setshowVA={setshowVA}
+              onAssistantResponse={handleAssistantMessage}
+            />
+          )}
           <div className="flex-1 relative">
             <input
               type="text"
