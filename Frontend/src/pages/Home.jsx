@@ -1,6 +1,5 @@
 // src/pages/Home.jsx
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import Hero from '../components/Hero';
 import CategoryCarousel from '../components/CategoryCarousel';
 import FlashDeals from '../components/FlashDeals';
@@ -10,33 +9,30 @@ import VideoSection from '../components/VideoSection';
 import TrendingSection from '../components/TrendingSection';
 import Footer from '../components/Footer';
 import Chatbot from '../components/Chatbot';
-import LiveKitModal from '../components/LivekitModal';
+import FeaturedProducts from '../components/FeaturedProducts'; // ✅ Add this
 
 const Home = () => {
-
-  const [showVA, setshowVA] = useState(false);
+  const [showVA, setShowVA] = useState(false);
 
   const handleAgentClick = () => {
-    setshowVA(true)
-  }
+    setShowVA(true);
+  };
 
   return (
     <div className="min-h-screen bg-white">
-      {/* <Header /> */}
       <main>
         <Hero />
         <CategoryCarousel />
         <FlashDeals />
+        <section className="px-4 py-10">
+          <FeaturedProducts />
+        </section>
         <SeasonalSection />
         <HomeDecorSection />
         <VideoSection />
         <TrendingSection />
         <Chatbot />
-        {/* <button className="voice-agent" onClick={handleAgentClick}>
-          <i class="fa-solid fa-microphone"></i>
-        </button> */}
       </main>
-      {/* {showVA && <LiveKitModal setshowVA={setshowVA}/>} */}
       <Footer />
     </div>
   );

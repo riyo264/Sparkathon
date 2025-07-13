@@ -54,7 +54,18 @@ const LiveKitModal = ({ setshowVA, onAssistantResponse }) => {
               <SimpleVoiceAssistant onAssistantResponse={onAssistantResponse} />
             </LiveKitRoom>
           ) : (
-            <p>Connecting to assistant...</p>
+            <div
+              style={{
+                color: "white",
+                textAlign: "center",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              Connecting to assistant...
+            </div>
           )}
         </div>
       </div>
