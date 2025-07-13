@@ -29,16 +29,16 @@ const SimpleVoiceAssistant = () => {
     participant: localParticipant.localParticipant,
   });
 
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
 
-//   useEffect(() => {
-//     const allMessages = [
-//       ...(agentTranscriptions?.map((t) => ({ ...t, type: "agent" })) ?? []),
-//       ...(userTranscriptions?.map((t) => ({ ...t, type: "user" })) ?? []),
-//     ].sort((a, b) => a.firstReceivedTime - b.firstReceivedTime);
+  // useEffect(() => {
+  //   const allMessages = [
+  //     ...(agentTranscriptions?.map((t) => ({ ...t, type: "agent" })) ?? []),
+  //     ...(userTranscriptions?.map((t) => ({ ...t, type: "user" })) ?? []),
+  //   ].sort((a, b) => a.firstReceivedTime - b.firstReceivedTime);
 
-//     setMessages(allMessages);
-//   }, [agentTranscriptions, userTranscriptions]);
+  //   setMessages(allMessages);
+  // }, [agentTranscriptions, userTranscriptions]);
 
   return (
     <div className="voice-assistant-container">
@@ -47,11 +47,6 @@ const SimpleVoiceAssistant = () => {
       </div>
       <div className="control-section">
         <VoiceAssistantControlBar />
-        <div className="conversation">
-          {/* {messages.map((msg, index) => (
-            <Message key={msg.id || index} type={msg.type} text={msg.text} />
-          ))} */}
-        </div>
       </div>
     </div>
   );

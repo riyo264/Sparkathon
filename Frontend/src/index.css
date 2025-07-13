@@ -70,16 +70,18 @@
 }
 
 .modal-content {
-  background-color: white;
+  background-color: rgba(1, 58, 144, 0.633);
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 50%;
   position: relative;
-  width: 80%;
+  width: 70vh;
   max-width: 800px;
-  height: 80vh;
+  height: 70vh;
+  margin-top: -50%;
 }
 
 .agent-room {
   height: 100%;
   width: 100%;
 }
+

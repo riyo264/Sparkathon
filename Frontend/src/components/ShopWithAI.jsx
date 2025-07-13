@@ -1,10 +1,11 @@
-import product1 from '../data/product1.json';
-import Header from '../components/Header';
-import {useParams} from 'react-router-dom';
-import React, {useState, useEffect, useMemo, useRef} from 'react';
+import product1 from "../data/product1.json";
+import Header from "../components/Header";
+import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useMemo, useRef } from "react";
+import LiveKitModal from "../components/LivekitModal";
 
-const ShopWithAI = () =>{
-    const [messages, setMessages] = useState([
+const ShopWithAI = () => {
+  const [messages, setMessages] = useState([
     {
       id: "1",
       text: "Hello! I'm your Walmart Shopping Assistant. How can I help you today? You can ask me to find products like 'show me wireless mouse available in blue color under a budget of 2000'.",
@@ -23,7 +24,8 @@ const ShopWithAI = () =>{
       name: "Logitech M185 Wireless Mouse",
       price: 14.99,
       rating: 4.5,
-      image: "https://readdy.ai/api/search-image?query=Professional%20product%20photography%20of%20a%20blue%20wireless%20Logitech%20mouse%20on%20a%20clean%20white%20background%2C%20showing%20clear%20details%20of%20buttons%20and%20ergonomic%20design%2C%20high%20resolution%20product%20shot%20with%20soft%20shadows%2C%20perfect%20for%20e-commerce&width=300&height=300&seq=1&orientation=squarish",
+      image:
+        "https://readdy.ai/api/search-image?query=Professional%20product%20photography%20of%20a%20blue%20wireless%20Logitech%20mouse%20on%20a%20clean%20white%20background%2C%20showing%20clear%20details%20of%20buttons%20and%20ergonomic%20design%2C%20high%20resolution%20product%20shot%20with%20soft%20shadows%2C%20perfect%20for%20e-commerce&width=300&height=300&seq=1&orientation=squarish",
       color: "blue",
       category: "wireless mouse",
     },
@@ -32,7 +34,8 @@ const ShopWithAI = () =>{
       name: "Microsoft Bluetooth Mouse",
       price: 19.99,
       rating: 4.3,
-      image: "https://readdy.ai/api/search-image?query=Professional%20product%20photography%20of%20a%20blue%20Microsoft%20Bluetooth%20mouse%20on%20a%20clean%20white%20background%2C%20showing%20clear%20details%20of%20buttons%20and%20ergonomic%20design%2C%20high%20resolution%20product%20shot%20with%20soft%20shadows%2C%20perfect%20for%20e-commerce&width=300&height=300&seq=2&orientation=squarish",
+      image:
+        "https://readdy.ai/api/search-image?query=Professional%20product%20photography%20of%20a%20blue%20Microsoft%20Bluetooth%20mouse%20on%20a%20clean%20white%20background%2C%20showing%20clear%20details%20of%20buttons%20and%20ergonomic%20design%2C%20high%20resolution%20product%20shot%20with%20soft%20shadows%2C%20perfect%20for%20e-commerce&width=300&height=300&seq=2&orientation=squarish",
       color: "blue",
       category: "wireless mouse",
     },
@@ -41,7 +44,8 @@ const ShopWithAI = () =>{
       name: "HP X3000 Wireless Mouse",
       price: 12.99,
       rating: 4.0,
-      image: "https://readdy.ai/api/search-image?query=Professional%20product%20photography%20of%20a%20blue%20HP%20wireless%20mouse%20on%20a%20clean%20white%20background%2C%20showing%20clear%20details%20of%20buttons%20and%20ergonomic%20design%2C%20high%20resolution%20product%20shot%20with%20soft%20shadows%2C%20perfect%20for%20e-commerce&width=300&height=300&seq=3&orientation=squarish",
+      image:
+        "https://readdy.ai/api/search-image?query=Professional%20product%20photography%20of%20a%20blue%20HP%20wireless%20mouse%20on%20a%20clean%20white%20background%2C%20showing%20clear%20details%20of%20buttons%20and%20ergonomic%20design%2C%20high%20resolution%20product%20shot%20with%20soft%20shadows%2C%20perfect%20for%20e-commerce&width=300&height=300&seq=3&orientation=squarish",
       color: "blue",
       category: "wireless mouse",
     },
@@ -50,34 +54,44 @@ const ShopWithAI = () =>{
       name: "Dell WM126 Wireless Mouse",
       price: 15.99,
       rating: 4.2,
-      image: "https://readdy.ai/api/search-image?query=Professional%20product%20photography%20of%20a%20blue%20Dell%20wireless%20mouse%20on%20a%20clean%20white%20background%2C%20showing%20clear%20details%20of%20buttons%20and%20ergonomic%20design%2C%20high%20resolution%20product%20shot%20with%20soft%20shadows%2C%20perfect%20for%20e-commerce&width=300&height=300&seq=4&orientation=squarish",
+      image:
+        "https://readdy.ai/api/search-image?query=Professional%20product%20photography%20of%20a%20blue%20Dell%20wireless%20mouse%20on%20a%20clean%20white%20background%2C%20showing%20clear%20details%20of%20buttons%20and%20ergonomic%20design%2C%20high%20resolution%20product%20shot%20with%20soft%20shadows%2C%20perfect%20for%20e-commerce&width=300&height=300&seq=4&orientation=squarish",
       color: "blue",
       category: "wireless mouse",
     },
   ];
+
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
   // Simulate speech recognition
-  const toggleListening = () => {
-    setIsListening(!isListening);
-    if (!isListening) {
-      // Simulate voice recognition after 3 seconds
-      setTimeout(() => {
-        setInputText("show me wireless mouse available in blue color under a budget of 2000");
-        setIsListening(false);
-      }, 3000);
-    } else {
-      setInputText("");
-    }
+  const [showVA, setshowVA] = useState(false);
+
+  const handleAgentClick = () => {
+    setshowVA(true);
   };
+  // const toggleListening = () => {
+  //   setIsListening(!isListening);
+  //   if (!isListening) {
+  //     // Simulate voice recognition after 3 seconds
+  //     setTimeout(() => {
+  //       setInputText(
+  //         "show me wireless mouse available in blue color under a budget of 2000"
+  //       );
+  //       setIsListening(false);
+  //     }, 3000);
+  //   } else {
+  //     setInputText("");
+  //   }
+  // };
 
   const handleSendMessage = () => {
     if (inputText.trim() === "") return;
-    
+
     // Add user message
     const userMessage = {
       id: Date.now().toString(),
@@ -85,20 +99,25 @@ const ShopWithAI = () =>{
       sender: "user",
       timestamp: new Date(),
     };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputText("");
     setIsTyping(true);
-    
+
     // Simulate bot response after 1 second
     setTimeout(() => {
       const botMessage = {
         id: (Date.now() + 1).toString(),
         text: "Here are some blue wireless mice under $20:",
         sender: "bot",
-        products: products.filter(p => p.color === "blue" && p.category === "wireless mouse" && p.price < 20),
+        products: products.filter(
+          (p) =>
+            p.color === "blue" &&
+            p.category === "wireless mouse" &&
+            p.price < 20
+        ),
         timestamp: new Date(),
       };
-      setMessages(prev => [...prev, botMessage]);
+      setMessages((prev) => [...prev, botMessage]);
       setIsTyping(false);
     }, 1000);
   };
@@ -109,9 +128,8 @@ const ShopWithAI = () =>{
     }
   };
 
-
-    return(
-        <div className="flex flex-col h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+  return (
+    <div className="flex flex-col h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Header */}
       <header className="bg-gradient-to-r from-[#0071DC] to-[#0086ff] text-white py-4 px-6 flex items-center justify-between shadow-lg">
         <div className="flex items-center transform hover:scale-105 transition-transform">
@@ -135,7 +153,7 @@ const ShopWithAI = () =>{
         ref={chatContainerRef}
         className="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-gray-50 to-gray-100"
         style={{
-        //   backgroundImage: "url('https://readdy.ai/api/search-image?query=Abstract%20subtle%20pattern%20with%20very%20light%20geometric%20shapes%20and%20dots%20creating%20a%20modern%20minimalist%20texture%20perfect%20for%20chat%20application%20background%20light%20gray%20color%20scheme%20professional%20clean%20design&width=400&height=400&seq=5&orientation=squarish')",
+          //   backgroundImage: "url('https://readdy.ai/api/search-image?query=Abstract%20subtle%20pattern%20with%20very%20light%20geometric%20shapes%20and%20dots%20creating%20a%20modern%20minimalist%20texture%20perfect%20for%20chat%20application%20background%20light%20gray%20color%20scheme%20professional%20clean%20design&width=400&height=400&seq=5&orientation=squarish')",
           backgroundRepeat: "repeat",
           backgroundSize: "400px",
         }}
@@ -143,7 +161,11 @@ const ShopWithAI = () =>{
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`mb-4 ${message.sender === "user" ? "flex justify-end" : "flex justify-start"}`}
+            className={`mb-4 ${
+              message.sender === "user"
+                ? "flex justify-end"
+                : "flex justify-start"
+            }`}
           >
             <div
               className={`max-w-[75%] rounded-lg p-4 backdrop-blur-sm ${
@@ -153,7 +175,7 @@ const ShopWithAI = () =>{
               }`}
             >
               <p>{message.text}</p>
-              
+
               {/* Product cards */}
               {message.products && message.products.length > 0 && (
                 <div className="mt-3 overflow-x-auto">
@@ -184,7 +206,11 @@ const ShopWithAI = () =>{
                               {[...Array(5)].map((_, i) => (
                                 <i
                                   key={i}
-                                  className={`fas fa-star ${i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"} text-sm`}
+                                  className={`fas fa-star ${
+                                    i < Math.floor(product.rating)
+                                      ? "text-yellow-400"
+                                      : "text-gray-300"
+                                  } text-sm`}
                                 ></i>
                               ))}
                             </div>
@@ -193,7 +219,8 @@ const ShopWithAI = () =>{
                             </span>
                           </div>
                           <button className="w-full bg-[#0071DC] text-white py-1.5 px-3 rounded-full hover:bg-blue-700 transition cursor-pointer !rounded-button whitespace-nowrap">
-                            <i className="fas fa-cart-plus mr-1"></i> Add to Cart
+                            <i className="fas fa-cart-plus mr-1"></i> Add to
+                            Cart
                           </button>
                         </div>
                       </div>
@@ -201,7 +228,7 @@ const ShopWithAI = () =>{
                   </div>
                 </div>
               )}
-              
+
               <div className="text-xs mt-1 opacity-70 text-right">
                 {message.timestamp.toLocaleTimeString([], {
                   hour: "2-digit",
@@ -211,7 +238,7 @@ const ShopWithAI = () =>{
             </div>
           </div>
         ))}
-        
+
         {/* Typing indicator */}
         {isTyping && (
           <div className="flex justify-start mb-4">
@@ -236,7 +263,7 @@ const ShopWithAI = () =>{
       <div className="bg-white/90 backdrop-blur-sm p-6 border-t border-gray-200 shadow-lg">
         <div className="flex items-center max-w-4xl mx-auto">
           <button
-            onClick={toggleListening}
+            onClick={handleAgentClick}
             className={`p-3 rounded-full mr-3 cursor-pointer !rounded-button whitespace-nowrap ${
               isListening
                 ? "bg-red-500 text-white animate-pulse"
@@ -246,13 +273,16 @@ const ShopWithAI = () =>{
           >
             <i className="fas fa-microphone"></i>
           </button>
+          {showVA && <LiveKitModal setshowVA={setshowVA} />}
           <div className="flex-1 relative">
             <input
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={isListening ? "Listening..." : "Type your message here..."}
+              placeholder={
+                isListening ? "Listening..." : "Type your message here..."
+              }
               className="w-full border-2 border-gray-200 rounded-full py-3 px-6 focus:outline-none focus:ring-2 focus:ring-[#0071DC] focus:border-transparent text-gray-700 placeholder-gray-400 shadow-inner bg-gray-50/50 backdrop-blur-sm transition-all duration-300"
               disabled={isListening}
             />
@@ -278,8 +308,7 @@ const ShopWithAI = () =>{
         )}
       </div>
     </div>
-
-    );
+  );
 };
 
 export default ShopWithAI;
