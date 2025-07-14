@@ -16,7 +16,7 @@ const CheckoutPage = () => {
     navigate('/order-success');
   };
 
-  const subtotal = 15037.92;
+  const subtotal = 1522.22;
   const shipping = 0;
   const total = subtotal + shipping;
   const formatINR = (value) => `₹${value.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;

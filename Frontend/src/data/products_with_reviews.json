@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Nike Air Max 270",
-    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSpC-REEACq1syMOPj4CSaFPNmidupqQG5vWhPomj88noPSxEaGKQxBVC8Gb9f-8OG_i3w5gmY7cWmyLKUdOa5w1dEb4GjJ58eN2o1-1dXjV1hhdky31s6e4Q",
     "price": 121.95,
     "rating": 4.0,
     "reviews": [
@@ -54,9 +54,9 @@
   },
   {
     "id": 3,
-    "name": "Sony WH-1000XM5 Headphones",
-    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
-    "price": 401.82,
+    "name": "Nothing Phone (3A) 5G (White, 8GB RAM, 256GB Storage)",
+    "image": "https://rukminim2.flixcart.com/image/704/844/xif0q/mobile/h/i/x/-original-imagyr3vfpqrpkbv.jpeg?q=90&crop=false",
+    "price": 2500.00,
     "rating": 4.8,
     "reviews": [
       {
@@ -74,7 +74,7 @@
   {
     "id": 4,
     "name": "Samsung Galaxy S23 Ultra",
-    "image": "https://m.media-amazon.com/images/I/71Sa3dqF9ZL._AC_SL1500_.jpg",
+    "image": "https://media-ik.croma.com/prod/https://media.croma.com/image/upload/v1709103010/Croma%20Assets/Communication/Mobiles/Images/275154_qj8x8q.png",
     "price": 1045.53,
     "rating": 4.4,
     "reviews": [
@@ -102,9 +102,9 @@
   },
   {
     "id": 5,
-    "name": "Sony WH-1000XM5 Headphones",
-    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
-    "price": 462.41,
+    "name": "Samsung UA32T4380AKXXL 32 Inch HD Ready Smart LED TV",
+    "image": "https://rukminim2.flixcart.com/image/850/1000/xif0q/television/k/h/w/-original-imah3868qdatnqg8.jpeg?q=90&crop=false",
+    "price": 46200.41,
     "rating": 4.8,
     "reviews": [
       {

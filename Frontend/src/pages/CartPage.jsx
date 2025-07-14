@@ -1,25 +1,24 @@
 // Enhanced CartPage.jsx - More attractive bill section
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import kurti from '../assets/kurti.png';
+import headphones from '../assets/headphones.png';
 import tshirt from '../assets/tshirt.png';
 import shoe from '../assets/shoes.png';
 import lakme from '../assets/lakme.png';
 import watch from '../assets/watch.png';
 import jeans from '../assets/jeans.png';
 import perfume from '../assets/perfume.png';
+import {useCart} from "../components/CartContext"
 
 const sampleCartItems = [
-  { id: 1, name: 'Floral Printed Pure Cotton Pleated Anarkali Kurti', price: 1165, quantity: 2, sku: '#555951628', image: kurti },
-  { id: 2, name: "Hanes Men's ComfortSoft T-Shirt", price: 299, quantity: 1, sku: '#12345678', image: tshirt },
-  { id: 3, name: 'PUMA SHOES', price: 7099, quantity: 1, sku: '#98765432', image: shoe },
-  { id: 4, name: 'Lakme Xtraordin-airy Mattereal Mousse Foundation, Matte Finish - 01 Classic Ivory, 25g', price: 199, quantity: 1, sku: '#98765433', image: lakme },
-  { id: 5, name: 'Analog Black Dial combo Watch', price: 499, quantity: 1, sku: '#12457890', image: watch },
-  { id: 6, name: 'Slim Fit Blue Denim Jeans', price: 2499, quantity: 1, sku: '#11223344', image: jeans },
-  { id: 7, name: 'Engage LAMANTE Perfume Spray, 220ml', price: 999, quantity: 1, sku: '#33445566', image: perfume }
+  { id: 1, name: 'Sony WH-1000XM5 Headphones', price: 363.94, quantity: 1, sku: '#555951628', image: headphones },
+  { id: 2, name: "Samsung Galaxy S23 Ultra", price: 1045.53, quantity: 1, sku: '#12345678', image: "https://rukminim2.flixcart.com/image/704/844/xif0q/mobile/q/k/h/-original-imagzm8qmr7qxfhq.jpeg?q=90&crop=false" }
 ];
 
 const CartPage = () => {
+  // const { cartItems, setCartItems } = useCart();
+  // Uncomment the line below to use sample cart items for testing
+
   const [cartItems, setCartItems] = useState(sampleCartItems);
   const [promo, setPromo] = useState('');
   const navigate = useNavigate();
