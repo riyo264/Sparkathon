@@ -1,0 +1,1187 @@
+[
+  {
+    "id": 1,
+    "name": "Nike Air Max 270",
+    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "price": 121.95,
+    "rating": 4.0,
+    "reviews": [
+      {
+        "user": "Jordan K.",
+        "rating": 4.1,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 4.2,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 3.6,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 363.94,
+    "rating": 4.2,
+    "reviews": [
+      {
+        "user": "Alex R.",
+        "rating": 3.9,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Sam C.",
+        "rating": 4.9,
+        "comment": "Not bad, but there's room for improvement."
+      },
+      {
+        "user": "Devon W.",
+        "rating": 3.6,
+        "comment": "Great value for the price. Would definitely buy again."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.3,
+        "comment": "Really impressed with the build and performance."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 401.82,
+    "rating": 4.8,
+    "reviews": [
+      {
+        "user": "Jordan K.",
+        "rating": 4.6,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.9,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Samsung Galaxy S23 Ultra",
+    "image": "https://m.media-amazon.com/images/I/71Sa3dqF9ZL._AC_SL1500_.jpg",
+    "price": 1045.53,
+    "rating": 4.4,
+    "reviews": [
+      {
+        "user": "Morgan B.",
+        "rating": 4.7,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 3.5,
+        "comment": "Really impressed with the build and performance."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.4,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Sam C.",
+        "rating": 4.9,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 462.41,
+    "rating": 4.8,
+    "reviews": [
+      {
+        "user": "Drew N.",
+        "rating": 4.7,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.9,
+        "comment": "Not bad, but there's room for improvement."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 421.48,
+    "rating": 4.6,
+    "reviews": [
+      {
+        "user": "Devon W.",
+        "rating": 4.9,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 4.9,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Chris M.",
+        "rating": 3.8,
+        "comment": "Great value for the price. Would definitely buy again."
+      },
+      {
+        "user": "Jamie L.",
+        "rating": 4.8,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 473.26,
+    "rating": 4.3,
+    "reviews": [
+      {
+        "user": "Riley P.",
+        "rating": 4.9,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 3.8,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1294.63,
+    "rating": 4.8,
+    "reviews": [
+      {
+        "user": "Taylor S.",
+        "rating": 4.9,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Sam C.",
+        "rating": 4.4,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Chris M.",
+        "rating": 5.0,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1145.49,
+    "rating": 4.4,
+    "reviews": [
+      {
+        "user": "Devon W.",
+        "rating": 3.9,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 4.9,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 4.9,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 3.7,
+        "comment": "Amazing! Highly recommend to anyone."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1215.88,
+    "rating": 4.1,
+    "reviews": [
+      {
+        "user": "Jamie L.",
+        "rating": 4.7,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 3.8,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.2,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 3.6,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Samsung Galaxy S23 Ultra",
+    "image": "https://m.media-amazon.com/images/I/71Sa3dqF9ZL._AC_SL1500_.jpg",
+    "price": 1022.85,
+    "rating": 4.2,
+    "reviews": [
+      {
+        "user": "Jamie L.",
+        "rating": 4.5,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 3.8,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Nike Air Max 270",
+    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "price": 172.99,
+    "rating": 4.1,
+    "reviews": [
+      {
+        "user": "Riley P.",
+        "rating": 3.7,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Jamie L.",
+        "rating": 4.3,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 4.6,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 3.8,
+        "comment": "Really impressed with the build and performance."
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1028.51,
+    "rating": 4.4,
+    "reviews": [
+      {
+        "user": "Sam C.",
+        "rating": 4.8,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 4.0,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Samsung Galaxy S23 Ultra",
+    "image": "https://m.media-amazon.com/images/I/71Sa3dqF9ZL._AC_SL1500_.jpg",
+    "price": 967.66,
+    "rating": 4.0,
+    "reviews": [
+      {
+        "user": "Jordan K.",
+        "rating": 4.5,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 3.6,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Apple AirPods Pro",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MWP22?wid=572&hei=572&fmt=jpeg",
+    "price": 234.05,
+    "rating": 4.0,
+    "reviews": [
+      {
+        "user": "Taylor S.",
+        "rating": 3.9,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 4.2,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Apple AirPods Pro",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MWP22?wid=572&hei=572&fmt=jpeg",
+    "price": 215.31,
+    "rating": 4.0,
+    "reviews": [
+      {
+        "user": "Jordan K.",
+        "rating": 4.3,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Jamie L.",
+        "rating": 3.7,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 4.2,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 3.8,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 465.25,
+    "rating": 4.2,
+    "reviews": [
+      {
+        "user": "Alex R.",
+        "rating": 3.5,
+        "comment": "Great value for the price. Would definitely buy again."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 4.3,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 4.7,
+        "comment": "Not bad, but there's room for improvement."
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1038.78,
+    "rating": 4.7,
+    "reviews": [
+      {
+        "user": "Morgan B.",
+        "rating": 4.8,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Sam C.",
+        "rating": 4.5,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Samsung Galaxy S23 Ultra",
+    "image": "https://m.media-amazon.com/images/I/71Sa3dqF9ZL._AC_SL1500_.jpg",
+    "price": 1074.97,
+    "rating": 4.7,
+    "reviews": [
+      {
+        "user": "Taylor S.",
+        "rating": 4.7,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      },
+      {
+        "user": "Jamie L.",
+        "rating": 4.6,
+        "comment": "Really impressed with the build and performance."
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Apple AirPods Pro",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MWP22?wid=572&hei=572&fmt=jpeg",
+    "price": 208.16,
+    "rating": 3.6,
+    "reviews": [
+      {
+        "user": "Chris M.",
+        "rating": 3.5,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Chris M.",
+        "rating": 3.8,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1245.05,
+    "rating": 4.0,
+    "reviews": [
+      {
+        "user": "Riley P.",
+        "rating": 3.8,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Devon W.",
+        "rating": 4.2,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1104.33,
+    "rating": 4.2,
+    "reviews": [
+      {
+        "user": "Jordan K.",
+        "rating": 3.7,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 3.6,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 4.7,
+        "comment": "Great value for the price. Would definitely buy again."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 4.7,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 424.16,
+    "rating": 4.7,
+    "reviews": [
+      {
+        "user": "Sam C.",
+        "rating": 5.0,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 4.1,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 4.9,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1286.11,
+    "rating": 3.8,
+    "reviews": [
+      {
+        "user": "Drew N.",
+        "rating": 3.7,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 3.6,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.2,
+        "comment": "Really impressed with the build and performance."
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Samsung Galaxy S23 Ultra",
+    "image": "https://m.media-amazon.com/images/I/71Sa3dqF9ZL._AC_SL1500_.jpg",
+    "price": 1423.89,
+    "rating": 3.8,
+    "reviews": [
+      {
+        "user": "Riley P.",
+        "rating": 3.5,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 3.6,
+        "comment": "Great value for the price. Would definitely buy again."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 4.3,
+        "comment": "Really impressed with the build and performance."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 3.8,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1120.27,
+    "rating": 4.3,
+    "reviews": [
+      {
+        "user": "Jamie L.",
+        "rating": 4.8,
+        "comment": "Really impressed with the build and performance."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 4.7,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 3.5,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 360.58,
+    "rating": 4.3,
+    "reviews": [
+      {
+        "user": "Morgan B.",
+        "rating": 4.1,
+        "comment": "Not bad, but there's room for improvement."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 4.4,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 4.4,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Devon W.",
+        "rating": 4.4,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 339.25,
+    "rating": 4.4,
+    "reviews": [
+      {
+        "user": "Alex R.",
+        "rating": 4.4,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.7,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 5.0,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 3.6,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 413.09,
+    "rating": 4.3,
+    "reviews": [
+      {
+        "user": "Alex R.",
+        "rating": 4.0,
+        "comment": "Great value for the price. Would definitely buy again."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 4.7,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1181.16,
+    "rating": 4.2,
+    "reviews": [
+      {
+        "user": "Jordan K.",
+        "rating": 4.0,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 4.5,
+        "comment": "Really impressed with the build and performance."
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 468.45,
+    "rating": 4.3,
+    "reviews": [
+      {
+        "user": "Devon W.",
+        "rating": 4.4,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Sam C.",
+        "rating": 4.2,
+        "comment": "Really impressed with the build and performance."
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Samsung Galaxy S23 Ultra",
+    "image": "https://m.media-amazon.com/images/I/71Sa3dqF9ZL._AC_SL1500_.jpg",
+    "price": 1106.62,
+    "rating": 3.7,
+    "reviews": [
+      {
+        "user": "Morgan B.",
+        "rating": 3.6,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Chris M.",
+        "rating": 3.5,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Devon W.",
+        "rating": 3.9,
+        "comment": "Amazing! Highly recommend to anyone."
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 979.98,
+    "rating": 4.8,
+    "reviews": [
+      {
+        "user": "Morgan B.",
+        "rating": 4.8,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 4.9,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 4.6,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Nike Air Max 270",
+    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "price": 137.56,
+    "rating": 4.3,
+    "reviews": [
+      {
+        "user": "Morgan B.",
+        "rating": 4.0,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.0,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Jamie L.",
+        "rating": 4.8,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 918.67,
+    "rating": 4.4,
+    "reviews": [
+      {
+        "user": "Riley P.",
+        "rating": 4.4,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.4,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1160.75,
+    "rating": 4.4,
+    "reviews": [
+      {
+        "user": "Chris M.",
+        "rating": 4.4,
+        "comment": "Not bad, but there's room for improvement."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.4,
+        "comment": "Really impressed with the build and performance."
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Nike Air Max 270",
+    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "price": 142.25,
+    "rating": 4.1,
+    "reviews": [
+      {
+        "user": "Alex R.",
+        "rating": 4.4,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 3.9,
+        "comment": "Really impressed with the build and performance."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 3.5,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Chris M.",
+        "rating": 4.7,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Nike Air Max 270",
+    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "price": 163.51,
+    "rating": 4.4,
+    "reviews": [
+      {
+        "user": "Jamie L.",
+        "rating": 4.0,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.5,
+        "comment": "Not bad, but there's room for improvement."
+      },
+      {
+        "user": "Devon W.",
+        "rating": 4.4,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Taylor S.",
+        "rating": 4.7,
+        "comment": "Amazing! Highly recommend to anyone."
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Apple AirPods Pro",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MWP22?wid=572&hei=572&fmt=jpeg",
+    "price": 287.91,
+    "rating": 3.7,
+    "reviews": [
+      {
+        "user": "Devon W.",
+        "rating": 3.8,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 3.6,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Nike Air Max 270",
+    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "price": 138.11,
+    "rating": 4.1,
+    "reviews": [
+      {
+        "user": "Riley P.",
+        "rating": 4.4,
+        "comment": "Really impressed with the build and performance."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 3.7,
+        "comment": "Really impressed with the build and performance."
+      },
+      {
+        "user": "Alex R.",
+        "rating": 4.5,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Sam C.",
+        "rating": 3.8,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 451.1,
+    "rating": 4.3,
+    "reviews": [
+      {
+        "user": "Chris M.",
+        "rating": 3.7,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Taylor S.",
+        "rating": 4.3,
+        "comment": "Amazing! Highly recommend to anyone."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 4.4,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Taylor S.",
+        "rating": 4.7,
+        "comment": "Amazing! Highly recommend to anyone."
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Nike Air Max 270",
+    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "price": 167.23,
+    "rating": 4.3,
+    "reviews": [
+      {
+        "user": "Jamie L.",
+        "rating": 4.2,
+        "comment": "Does the job well, satisfied with my purchase."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 4.9,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 4.2,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 4.0,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Samsung Galaxy S23 Ultra",
+    "image": "https://m.media-amazon.com/images/I/71Sa3dqF9ZL._AC_SL1500_.jpg",
+    "price": 1380.99,
+    "rating": 4.3,
+    "reviews": [
+      {
+        "user": "Jordan K.",
+        "rating": 4.0,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 4.8,
+        "comment": "Great value for the price. Would definitely buy again."
+      },
+      {
+        "user": "Devon W.",
+        "rating": 4.2,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Drew N.",
+        "rating": 4.4,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Nike Air Max 270",
+    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "price": 145.68,
+    "rating": 4.0,
+    "reviews": [
+      {
+        "user": "Taylor S.",
+        "rating": 3.9,
+        "comment": "Not bad, but there's room for improvement."
+      },
+      {
+        "user": "Taylor S.",
+        "rating": 4.0,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Sony WH-1000XM5 Headphones",
+    "image": "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg",
+    "price": 373.96,
+    "rating": 4.0,
+    "reviews": [
+      {
+        "user": "Morgan B.",
+        "rating": 3.8,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      },
+      {
+        "user": "Chris M.",
+        "rating": 4.2,
+        "comment": "Does the job well, satisfied with my purchase."
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Apple AirPods Pro",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MWP22?wid=572&hei=572&fmt=jpeg",
+    "price": 213.82,
+    "rating": 4.1,
+    "reviews": [
+      {
+        "user": "Sam C.",
+        "rating": 4.3,
+        "comment": "Not bad, but there's room for improvement."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 4.1,
+        "comment": "I've had better, but it\u2019s decent for the cost."
+      },
+      {
+        "user": "Taylor S.",
+        "rating": 4.0,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Samsung Galaxy S23 Ultra",
+    "image": "https://m.media-amazon.com/images/I/71Sa3dqF9ZL._AC_SL1500_.jpg",
+    "price": 1122.09,
+    "rating": 4.2,
+    "reviews": [
+      {
+        "user": "Morgan B.",
+        "rating": 4.7,
+        "comment": "Functionality is top-notch. Sleek and reliable."
+      },
+      {
+        "user": "Devon W.",
+        "rating": 3.6,
+        "comment": "Shipping was quick, and the product arrived in perfect condition."
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Nike Air Max 270",
+    "image": "https://static.nike.com/a/images/t_default/6f4d0c21-f2e4-4033-8f27-e6b06311d6c8/air-max-270-mens-shoes-KkLcGR.png",
+    "price": 138.47,
+    "rating": 4.0,
+    "reviews": [
+      {
+        "user": "Jordan K.",
+        "rating": 3.6,
+        "comment": "Great value for the price. Would definitely buy again."
+      },
+      {
+        "user": "Sam C.",
+        "rating": 4.4,
+        "comment": "Absolutely love this product, exceeded my expectations."
+      },
+      {
+        "user": "Jordan K.",
+        "rating": 4.1,
+        "comment": "Amazing! Highly recommend to anyone."
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1204.01,
+    "rating": 4.2,
+    "reviews": [
+      {
+        "user": "Drew N.",
+        "rating": 4.3,
+        "comment": "The quality is fantastic, works exactly as advertised."
+      },
+      {
+        "user": "Morgan B.",
+        "rating": 4.8,
+        "comment": "Really impressed with the build and performance."
+      },
+      {
+        "user": "Riley P.",
+        "rating": 3.9,
+        "comment": "Not bad, but there's room for improvement."
+      },
+      {
+        "user": "Devon W.",
+        "rating": 3.6,
+        "comment": "Great value for the price. Would definitely buy again."
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Apple MacBook Air M2",
+    "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-m2-2022",
+    "price": 1267.03,
+    "rating": 4.4,
+    "reviews": [
+      {
+        "user": "Drew N.",
+        "rating": 3.8,
+        "comment": "Not bad, but there's room for improvement."
+      },
+      {
+        "user": "Devon W.",
+        "rating": 5.0,
+        "comment": "Amazing! Highly recommend to anyone."
+      }
+    ]
+  }
+]
