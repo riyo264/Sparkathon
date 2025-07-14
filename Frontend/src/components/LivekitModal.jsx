@@ -2,10 +2,13 @@ import { useState, useEffect, useCallback } from "react";
 import { LiveKitRoom, RoomAudioRenderer } from "@livekit/components-react";
 import "@livekit/components-styles";
 import SimpleVoiceAssistant from "./SimpleVoiceAssistant";
+import {useCart} from "./CartContext";
 
 const LiveKitModal = ({ setshowVA, onAssistantResponse , onUserSpeech}) => {
   const [name, setName] = useState("");
   const [token, setToken] = useState(null);
+  const [isSubmittingName, setIsSubmittingName] = useState(false);
+
 
   const getToken = useCallback(async (userName) => {
     try {

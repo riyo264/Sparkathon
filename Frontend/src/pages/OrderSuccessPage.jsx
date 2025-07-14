@@ -24,9 +24,9 @@ const OrderSuccessPage = () => {
         <p className="text-gray-600 mb-6">Thank you for shopping with us!</p>
 
         <div className="bg-white rounded-lg px-4 py-3 shadow-inner text-left mb-6 text-sm md:text-base">
-          <p><strong>Total:</strong> ₹15,037.92</p>
-          <p><strong>Items:</strong> 7 Products</p>
-          <p><strong>Estimated Delivery:</strong> 10th July</p>
+          <p><strong>Total:</strong> ₹1522.22</p>
+          <p><strong>Items:</strong> 2 Products</p>
+          <p><strong>Estimated Delivery:</strong> 20th July</p>
         </div>
 
         {/* Buttons */}
@@ -46,11 +46,11 @@ const OrderSuccessPage = () => {
         </div>
 
         <p className="mt-8 text-sm text-gray-700 italic">
-          💙 Thank you for choosing <strong>Walmart</strong> — we value your trust.
+          💙 Thank you for choosing <strong>ShopAI</strong> — we value your trust.
         </p>
       </div>
     </div>
   );
 };
-
+  
 export default OrderSuccessPage;

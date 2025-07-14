@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import LiveKitModal from "../components/LivekitModal";
 import { FULL_PRODUCTS } from "../data/productsForAI"; // Adjust path
-
+import { useCart } from "./CartContext";
 
 const ShopWithAI = () => {
+  const { addToCart } = useCart();
   const [messages, setMessages] = useState([
     {
       id: "1",
@@ -135,18 +136,50 @@ const ShopWithAI = () => {
   // }
 
   const handleUserSpokenMessage = (text) => {
-  const userMessage = {
-    id: Date.now().toString(),
-    text,
-    sender: "user",
-    timestamp: new Date(),
+    const userMessage = {
+      id: Date.now().toString(),
+      text,
+      sender: "user",
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, userMessage]);
   };
-  setMessages((prev) => [...prev, userMessage]);
-};
-
 
 
   const handleAssistantMessage = (text) => {
+    console.log("Assistant response recieved:", text);
+    if (text.startsWith("tool_outputs:add_to_cart")) {
+      try {
+        const jsonStr = text.replace("tool_outputs:add_to_cart", "").trim();
+        const parsed = JSON.parse(jsonStr);
+        // parsed.cart.forEach((item) => {
+        //   addToCart(item);
+        // });
+
+        parsed.cart.forEach((item) => {
+          const matched = FULL_PRODUCTS.find((fp) =>
+            fp.name.toLowerCase().includes(item.name.toLowerCase())
+          );
+
+          if (matched) {
+            console.log("🛒 Adding to cart:", {
+              ...matched,
+              quantity: item.quantity,
+            });
+            addToCart({
+              ...matched,
+              quantity: item.quantity,
+            });
+          } else {
+            console.warn("Product not found in FULL_PRODUCTS:", item.name);
+          }
+        });
+      } catch (e) {
+        console.error("Failed to parse add_to_cart payload:", e);
+      }
+      return; // 🛑 Don't continue to product parsing for cart actions
+    }
+
     // Try to extract JSON tool_outputs from the assistant response
     const toolOutputs = [
       ...text.matchAll(/```tool_outputs\n([\s\S]*?)```/g),
@@ -174,8 +207,6 @@ const ShopWithAI = () => {
 
     const messageText = text.split("```")[0].trim(); // remove tool_output parts
 
-
-
     //fixing the code from giving blank screen when products properties doesnt match
     // const finalProducts = products.map((name, index) => ({
     //   id: index.toString(),
@@ -190,27 +221,25 @@ const ShopWithAI = () => {
     //   quantity: productDetails[name]?.quantity || 1,
     // }));
 
-
     const finalProducts = products
-  .map((p) => {
-    const name = p.name || p; // support both [{name: "..."}] and ["..."]
-    const matched = FULL_PRODUCTS.find((fp) =>
-      fp.name.toLowerCase().includes(name.toLowerCase())
-    );
-    if (matched) {
-      return {
-        ...matched,
-        quantity: productDetails[name]?.quantity || 1,
-        description:
-          productDetails[name]?.description || matched.description || "No description",
-      };
-    }
-    return null;
-  })
-  .filter(Boolean); // remove nulls
-
-
-
+      .map((p) => {
+        const name = p.name || p; // support both [{name: "..."}] and ["..."]
+        const matched = FULL_PRODUCTS.find((fp) =>
+          fp.name.toLowerCase().includes(name.toLowerCase())
+        );
+        if (matched) {
+          return {
+            ...matched,
+            quantity: productDetails[name]?.quantity || 1,
+            description:
+              productDetails[name]?.description ||
+              matched.description ||
+              "No description",
+          };
+        }
+        return null;
+      })
+      .filter(Boolean); // remove nulls
 
     const botMessage = {
       id: Date.now().toString(),
@@ -230,13 +259,10 @@ const ShopWithAI = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="flex flex-col items-center justify-center mx-auto bg-gradient-to-b from-gray-50 to-gray-100 w-[1300px] h-full">
       {/* Header */}
-      <header className="bg-gradient-to-r from-[#0071DC] to-[#0086ff] text-white py-4 px-6 flex items-center justify-between shadow-lg">
-        <div className="flex items-center transform hover:scale-105 transition-transform">
-          <i className="fas fa-shopping-cart text-2xl mr-3 animate-bounce"></i>
-          <span className="font-bold text-xl tracking-wide">Walmart</span>
-        </div>
+      {/* <header className="bg-gradient-to-r from-[#0071DC] to-[#0086ff] text-white py-4 px-6 flex items-center justify-between shadow-lg">
+        
         <h1 className="text-xl font-semibold tracking-wider flex items-center">
           <i className="fas fa-robot mr-2"></i>
           Shopping Assistant
@@ -247,12 +273,12 @@ const ShopWithAI = () => {
         >
           <i className="fas fa-cog"></i>
         </button>
-      </header>
+      </header> */}
 
       {/* Chat Container */}
       <div
         ref={chatContainerRef}
-        className="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-gray-50 to-gray-100"
+        className="flex-1 overflow-y-auto p-6 pb-32 bg-gradient-to-b from-gray-50 to-gray-100"
         style={{
           //   backgroundImage: "url('https://readdy.ai/api/search-image?query=Abstract%20subtle%20pattern%20with%20very%20light%20geometric%20shapes%20and%20dots%20creating%20a%20modern%20minimalist%20texture%20perfect%20for%20chat%20application%20background%20light%20gray%20color%20scheme%20professional%20clean%20design&width=400&height=400&seq=5&orientation=squarish')",
           backgroundRepeat: "repeat",
@@ -364,7 +390,7 @@ const ShopWithAI = () => {
       </div>
 
       {/* Input Area */}
-      <div className="bg-white/90 backdrop-blur-sm p-6 border-t border-gray-200 shadow-lg">
+      <div className=" fixed bottom-0  bg-white/90 backdrop-blur-sm p-6 border-t border-gray-200 shadow-lg w-[1300px]" >
         <div className="flex items-center max-w-4xl mx-auto">
           <button
             onClick={handleAgentClick}

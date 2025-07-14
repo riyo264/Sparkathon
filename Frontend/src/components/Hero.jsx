@@ -7,27 +7,27 @@ import beauty from '../assets/beauty.jpg';
 
 const Hero = () => {
   return (
-    <section className="relative w-full py-10 bg-white">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 items-center">
+    <section className="relative w-full py-3 bg-white">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 r">
 
           {/* BLACK FRIDAY HERO SECTION */}
-          <div className="relative lg:col-span-2 h-[966px] w-[64.66em] ml-[-7em] mt-[-2.5em] overflow-hidden">
+          <div className="relative lg:col-span-2 h-[600px] w-[50em] m overflow-hidden">
 
             {/* BACKGROUND LAYER: DotGrid */}
-            <div className="absolute inset-0 z-1">
+            <div className="absolute inset-0 z-1 rounded-lg overflow-hidden">
               <DotGrid
-                dotSize={6}
-                gap={14}
+                dotSize={5}
+                gap={10}
                 baseColor="#222"
                 activeColor="#FF13F0"
                 proximity={100}
-                speedTrigger={80}
+                speedTrigger={120}
                 shockRadius={300}
                 shockStrength={3}
                 maxSpeed={4500}
-                resistance={70}
-                returnDuration={1}
+                resistance={60}
+                returnDuration={0.5}
               />
             </div>
 
@@ -35,14 +35,14 @@ const Hero = () => {
             <img
               src={blackFridayImage}
               alt="Black Friday"
-              className="absolute inset-0 w-full h-full object-fill z-0 opacity-90"
+              className="absolute rounded-lg inset-0 w-full h-full object-fill z-0 opacity-90"
             />
 
             {/* DARK OVERLAY */}
             <div className="absolute inset-0 bg-black/10 z-10" />
 
             {/* CONTENT LAYER */}
-            <div className="relative z-20 w-full h-full flex flex-col items-center justify-center text-white text-center px-8">
+            <div className="relative z-20 w-full h-full rounded-lg  flex flex-col items-center justify-center text-white text-center px-8">
               <span className="text-sm uppercase text-white font-semibold tracking-wider mb-2">
                 Limited Time Offer
               </span>
@@ -64,7 +64,7 @@ const Hero = () => {
           </div>
 
           {/* RIGHT SIDE CARDS USING CHROMAGRID */}
-          <div className="w-full flex justify-center ml-[7em] mt-[-2.5em] items-start">
+          <div className="w-10px  flex justify-center  items-start">
             <ChromaGrid
               items={[
                 {

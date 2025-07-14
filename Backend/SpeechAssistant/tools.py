@@ -27,6 +27,10 @@ dummy_product_data = [
     {"id": "4", "name": "Dell WM126 Wireless Mouse", "price": 15.99, "rating": 4.2, "image": "https://readdy.ai/api/search-image?query=Professional%20product%20photography%20of%20a%20blue%20Dell%20wireless%20mouse%20on%20a%20clean%20white%20background%2C%20showing%20clear%20details%20of%20buttons%20and%20ergonomic%20design%2C%20high%20resolution%20product%20shot%20with%20soft%20shadows%2C%20perfect%20for%20e-commerce&width=300&height=300&seq=4&orientation=squarish", "color": "blue", "category": "wireless mouse"},   
 ]
 
+def wrap_tool_output(tool_name: str, payload: dict) -> str:
+    return f"```tool_outputs:{tool_name}\n{json.dumps(payload, indent=2)}\n```"
+
+
 def make_search_products(memory: MemoryStore):
     @function_tool()
     async def search_products(context: agents.RunContext, query: str) -> str:
@@ -37,9 +41,23 @@ def make_search_products(memory: MemoryStore):
                 results.append(product)
         memory.set("last_product_search", results)
         if results:
-            return f"Search completed. Found {len(results)} products matching '{query}'."
+            # return f"Search completed. Found {len(results)} products matching '{query}'."
+            tool_payload = {
+                "message": f"Search completed. Found {len(results)} products matching '{query}'.",
+                "products": [p["name"] for p in results]
+            }
+            # tool_output = f"```tool_outputs:search_products\n{json.dumps(tool_payload, indent=2)}\n```"
+            # return tool_output
+            return wrap_tool_output("search_products", tool_payload)
+
         else:
-            return f"No products found for '{query}'."
+            # return f"No products found for '{query}'."
+            tool_payload = {
+                "message": f"No products found for '{query}'.",
+                "products": []
+            }
+            return wrap_tool_output("search_products", tool_payload)
+
     return search_products
 
 def make_list_top_search_results(memory: MemoryStore):
@@ -52,7 +70,14 @@ def make_list_top_search_results(memory: MemoryStore):
         response = "Here are the top products from your search:\n"
         for idx, product in enumerate(top_results, start=1):
             response += f"{idx}. {product['name']}\n"
-        return response.strip()
+        # return response.strip()
+        tool_payload = {
+            "top_results": [product["name"] for product in top_results]
+        }
+        return wrap_tool_output("list_top_search_results", tool_payload)
+        # tool_output = f"```tool_outputs:list_top_search_results\n{json.dumps(tool_payload, indent=2)}\n```"
+        # return tool_output
+
     return list_top_search_results
 
 def make_add_to_cart(memory: MemoryStore):
@@ -81,7 +106,18 @@ def make_add_to_cart(memory: MemoryStore):
             "quantity": quantity
         })
         memory.set("cart", cart)
-        return f"Added {quantity} x '{matched_product['name']}' to your cart successfully."
+        # return f"Added {quantity} x '{matched_product['name']}' to your cart successfully."
+        # i want to return the toolname as well
+        tool_payload = {
+            "cart": [{
+                "name": matched_product["name"],
+                "quantity": quantity
+            }]
+        }
+        return wrap_tool_output("add_to_cart", tool_payload)
+        # tool_output = f"```tool_outputs:add_to_cart\n{json.dumps(tool_payload, indent=2)}\n```"
+        # return tool_output
+        
     
     return add_to_cart
 
@@ -111,7 +147,24 @@ def make_view_cart(memory: MemoryStore):
         response += f"\nand Delivery Fee is: ${delivery_fee}"
         response += f"\nTotal to Pay is: ${grand_total}"
 
-        return response.strip()
+        # return response.strip()
+        tool_payload = {
+            "cart": [
+                {
+                    "name": item["product"]["name"],
+                    "price": item["product"]["price"],
+                    "quantity": item["quantity"],
+                    "subtotal": item["product"]["price"] * item["quantity"]
+                } for item in cart
+            ],
+            "subtotal": total_cost,
+            "delivery_fee": delivery_fee,
+            "grand_total": grand_total
+        }
+        return wrap_tool_output("view_cart", tool_payload)
+        # tool_output = f"```tool_outputs:view_cart\n{json.dumps(tool_payload, indent=2)}\n```"
+        # return tool_output
+
 
     return view_cart
 
@@ -136,12 +189,24 @@ def make_place_order(memory: MemoryStore):
         # Clear the cart
         memory.set("cart", [])
 
-        return (
-            f"Order placed successfully for {len(cart)} items.\n"
-            f"Subtotal is: ${total_cost:.2f}\n"
-            f"Delivery Charge is: ${delivery_charge}\n"
-            f"Final Amount Paid is: ${final_amount:.2f}\n"
-            "Thank you for shopping with us!"
-        )
+        # return (
+        #     f"Order placed successfully for {len(cart)} items.\n"
+        #     f"Subtotal is: ${total_cost:.2f}\n"
+        #     f"Delivery Charge is: ${delivery_charge}\n"
+        #     f"Final Amount Paid is: ${final_amount:.2f}\n"
+        #     "Thank you for shopping with us!"
+        # )
+
+        tool_payload = {
+            "message": "Order placed successfully.",
+            "items": len(cart),
+            "subtotal": total_cost,
+            "delivery_fee": delivery_charge,
+            "final_amount": final_amount
+        }
+        return wrap_tool_output("place_order", tool_payload)
+        # tool_output = f"```tool_outputs:place_order\n{json.dumps(tool_payload, indent=2)}\n```"
+        # return tool_output
+
 
     return place_order
