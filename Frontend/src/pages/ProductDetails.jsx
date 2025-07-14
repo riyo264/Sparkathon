@@ -14,19 +14,26 @@ const ProductDetails = () => {
 
   if (!product) return <div className="p-6 text-red-500">Product not found</div>;
 
-  useEffect(() => {
-    fetch("http://localhost:5000/api/sentiment", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        reviews: product.reviews.map((r) => r.comment),
-      }),
+useEffect(() => {
+  fetch("http://localhost:8000/api/sentiment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      reviews: product.reviews.map((r) => r.comment),
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Sentiment response:", data);
+      setSentiment(data.sentiment);
     })
-      .then((res) => res.json())
-      .then((data) => {
-        setSentiment(data.sentiment);
-      });
-  }, [product]);
+    .catch((error) => {
+      console.error("Error fetching sentiment:", error);
+    });
+}, [product]);
+
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -91,17 +98,27 @@ const ProductDetails = () => {
 
           {/* Sentiment */}
           <p className={`text-sm font-semibold ${
-            sentiment === "Positive"
+            sentiment === "5 stars"
               ? "text-green-600"
-              : sentiment === "Negative"
+              : sentiment === "4 stars"
+              ? "text-green-500"
+              : sentiment === "3 stars"
+              ? "text-orange-600"
+              : sentiment === "2 stars"
               ? "text-red-500"
+              : sentiment === "1 star"
+              ? "text-red-600"
               : "text-gray-500"
           }`}>
             Sentiment: {sentiment || "Analyzing..."}{" "}
-            {sentiment === "Positive"
+            {sentiment === "5 stars"
               ? "😊"
-              : sentiment === "Negative"
+              : sentiment === "4 stars"
+              ? "😊"
+              : sentiment === "3 stars"
               ? "😐"
+              : sentiment === "2 stars"
+              ? ":("
               : "🤔"}
           </p>
         </div>
