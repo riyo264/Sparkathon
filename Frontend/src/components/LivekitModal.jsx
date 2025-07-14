@@ -3,7 +3,7 @@ import { LiveKitRoom, RoomAudioRenderer } from "@livekit/components-react";
 import "@livekit/components-styles";
 import SimpleVoiceAssistant from "./SimpleVoiceAssistant";
 
-const LiveKitModal = ({ setshowVA, onAssistantResponse }) => {
+const LiveKitModal = ({ setshowVA, onAssistantResponse , onUserSpeech}) => {
   const [name, setName] = useState("");
   const [token, setToken] = useState(null);
 
@@ -51,7 +51,10 @@ const LiveKitModal = ({ setshowVA, onAssistantResponse }) => {
               {/* <SimpleVoiceAssistant onAssistantResponse={(text) =>{
                 console.log("Assistant said: ",text);
                 }}/> */}
-              <SimpleVoiceAssistant onAssistantResponse={onAssistantResponse} />
+              <SimpleVoiceAssistant 
+              onAssistantResponse={onAssistantResponse} 
+              onUserSpeech ={onUserSpeech}
+              />
             </LiveKitRoom>
           ) : (
             <div

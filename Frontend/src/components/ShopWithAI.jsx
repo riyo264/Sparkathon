@@ -134,6 +134,18 @@ const ShopWithAI = () => {
   //   setMessages((prev) => [...prev, botMessage]);
   // }
 
+  const handleUserSpokenMessage = (text) => {
+  const userMessage = {
+    id: Date.now().toString(),
+    text,
+    sender: "user",
+    timestamp: new Date(),
+  };
+  setMessages((prev) => [...prev, userMessage]);
+};
+
+
+
   const handleAssistantMessage = (text) => {
     // Try to extract JSON tool_outputs from the assistant response
     const toolOutputs = [
@@ -369,6 +381,7 @@ const ShopWithAI = () => {
             <LiveKitModal
               setshowVA={setshowVA}
               onAssistantResponse={handleAssistantMessage}
+              onUserSpeech={handleUserSpokenMessage}
             />
           )}
           <div className="flex-1 relative">

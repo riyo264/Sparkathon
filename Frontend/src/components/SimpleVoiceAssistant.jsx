@@ -8,6 +8,7 @@ import {
 import { Track } from "livekit-client";
 import { useEffect, useState } from "react";
 import "./SimpleVoiceAssistant.css";
+import { use } from "react";
 
 // const Message = ({ type, text }) => {
 //   return (
@@ -20,7 +21,7 @@ import "./SimpleVoiceAssistant.css";
 //   );
 // };
 
-const SimpleVoiceAssistant = ({onAssistantResponse}) => {
+const SimpleVoiceAssistant = ({onAssistantResponse , onUserSpeech}) => {
   const { state, audioTrack, agentTranscriptions } = useVoiceAssistant();
   const localParticipant = useLocalParticipant();
   const { segments: userTranscriptions } = useTrackTranscription({
@@ -73,6 +74,7 @@ const SimpleVoiceAssistant = ({onAssistantResponse}) => {
 
 //to onloy print when final:true
 const [lastSpokenText, setLastSpokenText] = useState("");
+const [lastUserSpokenText, setLastUserSpokenText] = useState("");
 
 useEffect(() => {
   const lastAgentMessage = agentTranscriptions?.[agentTranscriptions.length - 1];
@@ -87,6 +89,22 @@ useEffect(() => {
     onAssistantResponse(lastAgentMessage.text);
   }
 }, [agentTranscriptions, lastSpokenText, onAssistantResponse]);
+
+//to handle user spoken test
+
+useEffect(() => {
+  const lastUserMessage = userTranscriptions?.[userTranscriptions.length - 1];
+
+  if (
+    lastUserMessage &&
+    lastUserMessage.text !== lastUserSpokenText &&
+    lastUserMessage.final && // ✅ only process final messages
+    onUserSpeech
+  ) {
+    setLastUserSpokenText(lastUserMessage.text);
+    onUserSpeech(lastUserMessage.text);
+  }
+} , [userTranscriptions, lastUserSpokenText, onUserSpeech]);
 
 
 
