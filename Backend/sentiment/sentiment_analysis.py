@@ -13,7 +13,7 @@ CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 
 API_URL = "https://api-inference.huggingface.co/models/nlptown/bert-base-multilingual-uncased-sentiment"
 headers = {
-    "Authorization": "Bearer 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"
+    "Authorization": f"Bearer {os.getenv('HF_TOKEN')}"
 }
 
 def query(payload):
