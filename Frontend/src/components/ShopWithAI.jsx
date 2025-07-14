@@ -259,7 +259,7 @@ const ShopWithAI = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center mx-auto h-screen bg-gradient-to-b from-gray-50 to-gray-100 w-[1300px] ">
+    <div className="flex flex-col items-center justify-center mx-auto bg-gradient-to-b from-gray-50 to-gray-100 w-[1300px] h-full">
       {/* Header */}
       {/* <header className="bg-gradient-to-r from-[#0071DC] to-[#0086ff] text-white py-4 px-6 flex items-center justify-between shadow-lg">
         
@@ -278,7 +278,7 @@ const ShopWithAI = () => {
       {/* Chat Container */}
       <div
         ref={chatContainerRef}
-        className="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-gray-50 to-gray-100"
+        className="flex-1 overflow-y-auto p-6 pb-32 bg-gradient-to-b from-gray-50 to-gray-100"
         style={{
           //   backgroundImage: "url('https://readdy.ai/api/search-image?query=Abstract%20subtle%20pattern%20with%20very%20light%20geometric%20shapes%20and%20dots%20creating%20a%20modern%20minimalist%20texture%20perfect%20for%20chat%20application%20background%20light%20gray%20color%20scheme%20professional%20clean%20design&width=400&height=400&seq=5&orientation=squarish')",
           backgroundRepeat: "repeat",
@@ -390,7 +390,7 @@ const ShopWithAI = () => {
       </div>
 
       {/* Input Area */}
-      <div className=" absolute bottom-0  bg-white/90 backdrop-blur-sm p-6 border-t border-gray-200 shadow-lg">
+      <div className=" fixed bottom-0  bg-white/90 backdrop-blur-sm p-6 border-t border-gray-200 shadow-lg w-[1300px]" >
         <div className="flex items-center max-w-4xl mx-auto">
           <button
             onClick={handleAgentClick}
