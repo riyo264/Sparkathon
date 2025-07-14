@@ -1,63 +1,36 @@
 // src/pages/ProductDetails.jsx
 
-import React, {useEffect} from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import product1 from '../data/Product1.json';
-import product2 from '../data/Product2.json';
-import { FaStar, FaBarcode, FaTag, FaCartPlus, FaArrowLeft } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-
-const allProducts = [...product1, ...product2];
-
-const sampleReviews = [
-  {
-    user: 'Amit S.',
-    avatar: 'https://i.pravatar.cc/40?img=3',
-    rating: 5,
-    comment: 'Absolutely amazing product! Quality is top-notch.',
-  },
-  {
-    user: 'Sneha R.',
-    avatar: 'https://i.pravatar.cc/40?img=5',
-    rating: 4,
-    comment: 'Good value for the price. Satisfied overall.',
-  },
-];
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import products from "../data/products_with_reviews.json";
+import { FaStar, FaCartPlus, FaArrowLeft } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const product = allProducts[parseInt(id)];
+  const product = products[parseInt(id)];
+  const [sentiment, setSentiment] = useState(null);
 
   if (!product) return <div className="p-6 text-red-500">Product not found</div>;
 
-useEffect(() => {
-  fetch("http://localhost:5000/api/sentiment", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      reviews: product.reviews // the current product1 and product2 json do not have a proper reviews section  
-      // IF THE JSON HAVE A BELOW FORMAT
-      // Use "reviews: product.reviews.map((r) => r.comment)" instead of "reviews: product.reviews"
-      //            {
-        //           "title": "Travel Bag",
-        //           "price": 999,
-        //           "reviews": [
-          //             { "user": "Amit", "comment": "Great quality and value for money!" },
-          //             { "user": "Sneha", "comment": "Looks great, but zip broke quickly." }
-          //           ]
-      //            }
+  useEffect(() => {
+    fetch("http://localhost:5000/api/sentiment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        reviews: product.reviews.map((r) => r.comment),
+      }),
     })
-  })
-    .then(res => res.json())
-    .then(data => {
-      setSentiment(data.sentiment); // show result in UI
-    });
-}, [product]); //re-run when product changes  
-
+      .then((res) => res.json())
+      .then((data) => {
+        setSentiment(data.sentiment);
+      });
+  }, [product]);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
@@ -71,58 +44,65 @@ useEffect(() => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-lg shadow-lg p-6"
+        className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-gradient-to-r from-white via-blue-50 to-white rounded-xl shadow-xl p-6"
       >
-        {/* Product Image */}
+
+        {/* Product Image with Gradient Border */}
         <div className="flex flex-col items-center">
-          <img
-            src={product.imgUrl}
-            alt={product.title}
-            className="w-full max-w-md h-96 object-contain rounded-lg shadow-md hover:scale-105 transition-transform"
-          />
+          <div className="p-1 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-xl shadow-lg">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full max-w-md h-96 object-contain rounded-lg bg-white p-4"
+            />
+          </div>
         </div>
 
         {/* Sticky Product Info */}
         <div className="md:sticky md:top-20 flex flex-col justify-center space-y-4">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">{product.title}</h1>
+          <h1 className="text-3xl font-bold text-gray-800">{product.name}</h1>
 
-          <div className="flex items-center text-yellow-500 text-lg">
-            <FaStar className="mr-1" />
-            {product.stars || "N/A"} / 5
-            <span className="text-gray-500 text-sm ml-2">({product.reviews} reviews)</span>
-          </div>
-
-          <div className="mt-1 text-2xl text-green-600 font-semibold">₹{product.price}</div>
-          {product.listPrice > 0 && (
-            <div className="text-sm text-gray-500 line-through">M.R.P: ₹{product.listPrice}</div>
-          )}
-
-          <div className="flex flex-wrap gap-2 mt-2 text-xs">
-            <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full flex items-center gap-1">
-              <FaTag /> Category: {product.category_id}
-            </span>
-            <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full flex items-center gap-1">
-              <FaBarcode /> ASIN: {product.asin}
+          {/* Dynamic Stars */}
+          <div className="flex items-center gap-1 text-yellow-400 text-lg">
+            {Array.from({ length: 5 }, (_, i) => (
+              <FaStar
+                key={i}
+                className={i < Math.round(product.rating) ? "" : "text-gray-300"}
+              />
+            ))}
+            <span className="text-gray-500 text-sm ml-2">
+              ({product.reviews.length} reviews)
             </span>
           </div>
 
-          {product.isBestSeller && (
-            <span className="inline-block bg-yellow-400 text-white text-xs font-bold px-2 py-1 rounded">
-              BEST SELLER
-            </span>
-          )}
+          <div className="mt-1 text-2xl text-green-600 font-semibold">
+            ₹{product.price}
+          </div>
 
-          <a
-            href={product.productURL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white px-5 py-3 rounded-lg hover:scale-105 transition-transform shadow-lg"
+          {/* Animated Buy Button */}
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="#"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl transition-all"
           >
-            <FaCartPlus /> Buy on Walmart
-          </a>
+            <FaCartPlus /> Buy Now
+          </motion.a>
 
-          <p className="text-sm text-gray-600 mt-3">
-            <strong>Bought in Last Month:</strong> {product.boughtInLastMonth}
+          {/* Sentiment */}
+          <p className={`text-sm font-semibold ${
+            sentiment === "Positive"
+              ? "text-green-600"
+              : sentiment === "Negative"
+              ? "text-red-500"
+              : "text-gray-500"
+          }`}>
+            Sentiment: {sentiment || "Analyzing..."}{" "}
+            {sentiment === "Positive"
+              ? "😊"
+              : sentiment === "Negative"
+              ? "😐"
+              : "🤔"}
           </p>
         </div>
       </motion.div>
@@ -135,18 +115,11 @@ useEffect(() => {
         className="mt-8"
       >
         <h2 className="text-xl font-semibold mb-3">Description</h2>
-        <p className="text-gray-700 text-base leading-relaxed bg-gray-50 p-4 rounded-lg shadow-sm">
-          Perfect Checked Bag for Longer Trips: Get through a crowded airport easily with this
-          ergonomic, expandable, soft-sided checked luggage with ample storage and all the
-          organizational aids that you need. 360-Degree Multi-Directional Spinner Wheels: Navigate
-          small spaces with ease. Made from durable, scuff-resistant polyester fabric.
+        <p className="text-gray-700 text-base leading-relaxed bg-white/70 backdrop-blur-lg p-4 rounded-lg shadow-md">
+          This product is designed for optimal quality and customer satisfaction.
+          Enjoy premium features, reliable performance, and superior build quality.
         </p>
       </motion.div>
-
-    <div>
-      <h1>{product.name}</h1>
-      <p>Sentiment: {sentiment || "Analyzing..."}</p>
-    </div>
 
       {/* Reviews */}
       <motion.div
@@ -157,18 +130,32 @@ useEffect(() => {
       >
         <h2 className="text-xl font-semibold mb-3">Customer Reviews</h2>
         <div className="space-y-4">
-          {sampleReviews.map((review, index) => (
-            <div
+          {product.reviews.map((review, index) => (
+            <motion.div
               key={index}
-              className="flex items-start gap-3 bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * index }}
+              className="flex items-start gap-3 bg-white p-4 rounded-lg shadow hover:shadow-xl hover:scale-[1.01] transition-all"
             >
-              <img src={review.avatar} alt={review.user} className="w-10 h-10 rounded-full" />
+              <div className="relative">
+                <img
+                  src={`https://i.pravatar.cc/40?img=${index + 3}`}
+                  alt={review.user}
+                  className="w-10 h-10 rounded-full border-2 border-gradient-to-r from-purple-500 to-pink-500"
+                />
+                {index === 0 && (
+                  <span className="absolute -top-2 -right-2 bg-yellow-400 text-white text-xs px-2 py-0.5 rounded">
+                    Top
+                  </span>
+                )}
+              </div>
               <div>
                 <p className="font-medium">{review.user}</p>
                 <p className="text-yellow-500 text-sm">⭐ {review.rating} / 5</p>
-                <p className="text-gray-700 text-sm mt-1">{review.comment}</p>
+                <p className="text-gray-600 text-sm mt-1 line-clamp-3">{review.comment}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>
