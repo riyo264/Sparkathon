@@ -1,3 +1,4 @@
+livekit-server-sdk
 livekit-agents
 livekit-plugins-openai
 livekit-plugins-silero
@@ -8,3 +9,5 @@ duckduckgo-search
 langchain_community
 requests
 python-dotenv
+flask
+flask-cors
