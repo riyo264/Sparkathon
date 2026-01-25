@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 from livekit.api import LiveKitAPI, ListRoomsRequest
 import uuid
+import asyncio
 
 load_dotenv()
 
@@ -25,12 +26,12 @@ async def get_rooms():
     return [room.name for room in rooms.rooms]
 
 @app.route("/getToken")
-async def get_token():
+def get_token():
     name = request.args.get("name", "my name")
     room = request.args.get("room", None)
     
     if not room:
-        room = await generate_room_name()
+        rooms = asyncio.run(get_rooms())
         
     token = api.AccessToken(os.getenv("LIVEKIT_API_KEY"), os.getenv("LIVEKIT_API_SECRET")) \
         .with_identity(name)\
@@ -43,4 +44,7 @@ async def get_token():
     return token.to_jwt()
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(
+    host="0.0.0.0",
+    port=int(os.environ.get("PORT", 8080)),
+)
