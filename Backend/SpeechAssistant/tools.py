@@ -31,16 +31,24 @@ def wrap_tool_output(tool_name: str, payload: dict) -> str:
 def make_search_products(memory: MemoryStore):
     @function_tool()
     async def search_products(context: agents.RunContext, query: str) -> str:
-        # Your search logic
+        if not query or not query.strip():
+            return wrap_tool_output(
+                "search_products",
+                {"message": "Please provide a product search query.", "products": []},
+            )
+
+        normalized_query = query.lower().strip()
         results = []
         for product in dummy_product_data:
-            if query.lower() in product['name'].lower() or query.lower() in product['description'].lower():
+            name = str(product.get("name", "")).lower()
+            description = str(product.get("description", "")).lower()
+            if normalized_query in name or normalized_query in description:
                 results.append(product)
         memory.set("last_product_search", results)
         if results:
             # return f"Search completed. Found {len(results)} products matching '{query}'."
             tool_payload = {
-                "message": f"Search completed. Found {len(results)} products matching '{query}'.",
+                "message": f"Search completed. Found {len(results)} products matching '{query.strip()}'.",
                 "products": [p["name"] for p in results]
             }
             # tool_output = f"```tool_outputs:search_products\n{json.dumps(tool_payload, indent=2)}\n```"
@@ -62,13 +70,14 @@ def make_list_top_search_results(memory: MemoryStore):
     async def list_top_search_results(context: agents.RunContext, max_items: int = 10) -> str:
         results = memory.get("last_product_search", [])
         if not results:
-            return "No recent search results found. Please perform a search first."
-        top_results = results[:max_items]
-        response = "Here are the top products from your search:\n"
-        for idx, product in enumerate(top_results, start=1):
-            response += f"{idx}. {product['name']}\n"
-        # return response.strip()
+            return wrap_tool_output(
+                "list_top_search_results",
+                {"message": "No recent search results found. Please perform a search first.", "top_results": []},
+            )
+        safe_max_items = max(1, min(max_items, 20))
+        top_results = results[:safe_max_items]
         tool_payload = {
+            "message": f"Here are the top {len(top_results)} products from your search.",
             "top_results": [product["name"] for product in top_results]
         }
         return wrap_tool_output("list_top_search_results", tool_payload)
@@ -84,7 +93,15 @@ def make_add_to_cart(memory: MemoryStore):
     async def add_to_cart(context: agents.RunContext, product_name: str, quantity: int = 1) -> str:
         search_results = memory.get("last_product_search", [])
         if not search_results:
-            return "No recent search results found. Please search for products first."
+            return wrap_tool_output(
+                "add_to_cart",
+                {"message": "No recent search results found. Please search for products first.", "cart": []},
+            )
+        if not product_name or not product_name.strip():
+            return wrap_tool_output(
+                "add_to_cart",
+                {"message": "Please provide a product name.", "cart": []},
+            )
 
         # Try to find the product by name (case-insensitive)
         matched_product = None
@@ -94,13 +111,20 @@ def make_add_to_cart(memory: MemoryStore):
                 break
 
         if not matched_product:
-            return f"No product named '{product_name}' found in the recent search results."
+            return wrap_tool_output(
+                "add_to_cart",
+                {
+                    "message": f"No product named '{product_name}' found in the recent search results.",
+                    "cart": [],
+                },
+            )
 
         # Add to cart with quantity
+        safe_quantity = max(1, quantity)
         cart = memory.get("cart", [])
         cart.append({
             "product": matched_product,
-            "quantity": quantity
+            "quantity": safe_quantity
         })
         memory.set("cart", cart)
         # return f"Added {quantity} x '{matched_product['name']}' to your cart successfully."
@@ -108,8 +132,9 @@ def make_add_to_cart(memory: MemoryStore):
         tool_payload = {
             "cart": [{
                 "name": matched_product["name"],
-                "quantity": quantity
-            }]
+                "quantity": safe_quantity
+            }],
+            "message": f"Added {safe_quantity} x '{matched_product['name']}' to your cart."
         }
         return wrap_tool_output("add_to_cart", tool_payload)
         # tool_output = f"```tool_outputs:add_to_cart\n{json.dumps(tool_payload, indent=2)}\n```"
