@@ -1,8 +1,5 @@
-import logging
-from livekit.agents import function_tool, RunContext
-import requests
+from livekit.agents import function_tool
 from livekit import agents
-from langchain_community.tools import DuckDuckGoSearchRun
 import json
 from memory import MemoryStore
 
@@ -210,3 +207,43 @@ def make_place_order(memory: MemoryStore):
 
 
     return place_order
+
+
+def make_website_action(memory: MemoryStore):
+    @function_tool(
+        description=(
+            "Perform website UI tasks such as navigation and checkout flow. "
+            "Supported actions: navigate_home, navigate_shop_ai, navigate_cart, "
+            "navigate_checkout, navigate_order_success."
+        )
+    )
+    async def website_action(context: agents.RunContext, action: str) -> str:
+        supported_actions = {
+            "navigate_home",
+            "navigate_shop_ai",
+            "navigate_cart",
+            "navigate_checkout",
+            "navigate_order_success",
+        }
+        normalized = action.strip().lower()
+        if normalized not in supported_actions:
+            return wrap_tool_output(
+                "website_action",
+                {
+                    "status": "error",
+                    "message": f"Unsupported action '{action}'.",
+                    "supported_actions": sorted(supported_actions),
+                },
+            )
+
+        memory.set("last_website_action", normalized)
+        return wrap_tool_output(
+            "website_action",
+            {
+                "status": "ok",
+                "action": normalized,
+                "message": f"Website action '{normalized}' prepared.",
+            },
+        )
+
+    return website_action

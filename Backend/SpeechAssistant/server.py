@@ -1,4 +1,5 @@
 import os
+import uuid
 from flask import Flask, request
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -12,7 +13,7 @@ CORS(app)
 @app.route("/getToken")
 def get_token():
     name = request.args.get("name", "guest")
-    room = request.args.get("room", "default-room")
+    room = request.args.get("room") or f"room-{uuid.uuid4().hex[:10]}"
 
     token = (
         api.AccessToken(
@@ -34,5 +35,5 @@ def get_token():
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
-        port=int(os.environ.get("PORT", 8080)),
+        port=int(os.environ.get("PORT", 5001)),
     )

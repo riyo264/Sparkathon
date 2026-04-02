@@ -1,13 +1,12 @@
-import product1 from "../data/product1.json";
-import Header from "../components/Header";
-import { useParams } from "react-router-dom";
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import LiveKitModal from "../components/LivekitModal";
 import { FULL_PRODUCTS } from "../data/productsForAI"; // Adjust path
 import { useCart } from "./CartContext";
 
 const ShopWithAI = () => {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
   const [messages, setMessages] = useState([
     {
       id: "1",
@@ -148,64 +147,63 @@ const ShopWithAI = () => {
 
   const handleAssistantMessage = (text) => {
     console.log("Assistant response recieved:", text);
-    if (text.startsWith("tool_outputs:add_to_cart")) {
+    const blocks = [
+      ...text.matchAll(/```tool_outputs:([a-z_]+)\n([\s\S]*?)```/g),
+    ].map((match) => ({
+      tool: match[1],
+      payload: match[2],
+    }));
+
+    const parsedByTool = {};
+    blocks.forEach((block) => {
       try {
-        const jsonStr = text.replace("tool_outputs:add_to_cart", "").trim();
-        const parsed = JSON.parse(jsonStr);
-        // parsed.cart.forEach((item) => {
-        //   addToCart(item);
-        // });
-
-        parsed.cart.forEach((item) => {
-          const matched = FULL_PRODUCTS.find((fp) =>
-            fp.name.toLowerCase().includes(item.name.toLowerCase())
-          );
-
-          if (matched) {
-            console.log("🛒 Adding to cart:", {
-              ...matched,
-              quantity: item.quantity,
-            });
-            addToCart({
-              ...matched,
-              quantity: item.quantity,
-            });
-          } else {
-            console.warn("Product not found in FULL_PRODUCTS:", item.name);
-          }
-        });
-      } catch (e) {
-        console.error("Failed to parse add_to_cart payload:", e);
+        parsedByTool[block.tool] = JSON.parse(block.payload);
+      } catch (error) {
+        console.error(`Failed to parse tool payload for ${block.tool}:`, error);
       }
-      return; // 🛑 Don't continue to product parsing for cart actions
+    });
+
+    const addToCartPayload = parsedByTool.add_to_cart;
+    if (addToCartPayload?.cart?.length) {
+      addToCartPayload.cart.forEach((item) => {
+        const matched = FULL_PRODUCTS.find((fp) =>
+          fp.name.toLowerCase().includes(item.name.toLowerCase())
+        );
+
+        if (matched) {
+          addToCart({
+            ...matched,
+            quantity: item.quantity,
+          });
+        }
+      });
     }
 
-    // Try to extract JSON tool_outputs from the assistant response
-    const toolOutputs = [
-      ...text.matchAll(/```tool_outputs\n([\s\S]*?)```/g),
-    ].map((match) => match[1]);
-
-    let products = [];
-    let productDetails = {};
-
-    if (toolOutputs.length >= 1) {
-      try {
-        const productList = JSON.parse(toolOutputs[0].replace(/'/g, '"'));
-        products = productList.products || [];
-      } catch (e) {
-        console.error("Failed to parse product list:", e);
+    const websiteActionPayload = parsedByTool.website_action;
+    if (websiteActionPayload?.status === "ok") {
+      const actionToRoute = {
+        navigate_home: "/",
+        navigate_shop_ai: "/shop-with-ai",
+        navigate_cart: "/cart",
+        navigate_checkout: "/checkout",
+        navigate_order_success: "/order-success",
+      };
+      const nextRoute = actionToRoute[websiteActionPayload.action];
+      if (nextRoute) {
+        navigate(nextRoute);
       }
     }
 
-    if (toolOutputs.length >= 2) {
-      try {
-        productDetails = JSON.parse(toolOutputs[1].replace(/'/g, '"'));
-      } catch (e) {
-        console.error("Failed to parse product details:", e);
-      }
-    }
+    const productListPayload = parsedByTool.search_products;
+    const topResultsPayload = parsedByTool.list_top_search_results;
+    const namesFromSearch = productListPayload?.products ?? [];
+    const namesFromTopResults = topResultsPayload?.top_results ?? [];
+    const combinedNames =
+      namesFromSearch.length > 0 ? namesFromSearch : namesFromTopResults;
 
-    const messageText = text.split("```")[0].trim(); // remove tool_output parts
+    const messageText = text
+      .replace(/```tool_outputs:[a-z_]+\n[\s\S]*?```/g, "")
+      .trim();
 
     //fixing the code from giving blank screen when products properties doesnt match
     // const finalProducts = products.map((name, index) => ({
@@ -221,7 +219,7 @@ const ShopWithAI = () => {
     //   quantity: productDetails[name]?.quantity || 1,
     // }));
 
-    const finalProducts = products
+    const finalProducts = combinedNames
       .map((p) => {
         const name = p.name || p; // support both [{name: "..."}] and ["..."]
         const matched = FULL_PRODUCTS.find((fp) =>
@@ -230,11 +228,8 @@ const ShopWithAI = () => {
         if (matched) {
           return {
             ...matched,
-            quantity: productDetails[name]?.quantity || 1,
-            description:
-              productDetails[name]?.description ||
-              matched.description ||
-              "No description",
+            quantity: 1,
+            description: matched.description || "No description",
           };
         }
         return null;
